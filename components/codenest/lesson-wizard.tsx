@@ -11,6 +11,11 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { CodeBlock } from "@/components/codenest/code-block";
+import { FlowchartStepAnimation } from "@/components/codenest/flowchart-step-animation";
+import { FlowchartSymbol, isFlowchartSymbolKey } from "@/components/codenest/flowchart-symbol";
+import { TriangleFlowchart } from "@/components/codenest/triangle-flowchart";
+import { ConditionalFlowchart } from "@/components/codenest/conditional-flowchart";
+import { MultiConditionalFlowchart } from "@/components/codenest/multi-conditional-flowchart";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -802,54 +807,78 @@ function TheoryStep({
         ) : null}
       </View>
 
-      {step.table ? (
-        <View className={cn("overflow-hidden rounded-3xl border", tone.accentBorder)}>
-          <View className={cn("flex-row border-b", tone.accentBorder, tone.accentSoftBg)}>
-            {step.table.headers.map((header, idx) => (
+      {step.table ? (() => {
+        const isSymbolTable = step.table.headers.some(
+          (h) => h.toLowerCase() === "figura" || h.toLowerCase() === "figuras",
+        );
+
+        return (
+          <View className={cn("overflow-hidden rounded-3xl border", tone.accentBorder)}>
+            <View className={cn("flex-row border-b", tone.accentBorder, tone.accentSoftBg)}>
+              {step.table.headers.map((header, idx) => {
+                const isFiguraCol = isSymbolTable && idx === 0;
+                const isDescCol = isSymbolTable && idx === 2;
+
+                return (
+                  <View
+                    key={header}
+                    className={cn(
+                      "px-3 py-3 justify-center",
+                      isFiguraCol ? "w-24 items-center" : isDescCol ? "flex-[2]" : "flex-1",
+                      idx < step.table!.headers.length - 1 && "border-r",
+                      idx < step.table!.headers.length - 1 && tone.accentBorder,
+                    )}
+                  >
+                    <Text className={cn("text-caption uppercase tracking-[0.22em]", tone.accentText)}>
+                      {header}
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+            {step.table.rows.map((row, rowIdx) => (
               <View
-                key={header}
+                key={`${row[0]}-${rowIdx}`}
                 className={cn(
-                  "flex-1 px-4 py-3",
-                  idx < step.table!.headers.length - 1 && "border-r",
-                  idx < step.table!.headers.length - 1 && tone.accentBorder,
+                  "flex-row items-center",
+                  rowIdx !== step.table!.rows.length - 1 && "border-b border-border",
                 )}
               >
-                <Text className={cn("text-caption uppercase tracking-[0.22em]", tone.accentText)}>
-                  {header}
-                </Text>
+                {row.map((cell, idx) => {
+                  const isFiguraCol = isSymbolTable && idx === 0;
+                  const isDescCol = isSymbolTable && idx === 2;
+                  const isSymbol = isFlowchartSymbolKey(cell);
+
+                  return (
+                    <View
+                      key={`${cell}-${idx}`}
+                      className={cn(
+                        "px-3 py-3 justify-center",
+                        isFiguraCol ? "w-24 items-center" : isDescCol ? "flex-[2]" : "flex-1",
+                        idx < row.length - 1 && "border-r border-border",
+                      )}
+                    >
+                      {isSymbol ? (
+                        <FlowchartSymbol name={cell} />
+                      ) : (
+                        <Text
+                          className={cn(
+                            "text-body leading-6 text-foreground",
+                            idx === 0 && "font-semibold",
+                            idx === 1 && isSymbolTable && "font-mono font-medium text-foreground",
+                          )}
+                        >
+                          {cell}
+                        </Text>
+                      )}
+                    </View>
+                  );
+                })}
               </View>
             ))}
           </View>
-          {step.table.rows.map((row, rowIdx) => (
-            <View
-              key={`${row[0]}-${rowIdx}`}
-              className={cn(
-                "flex-row",
-                rowIdx !== step.table!.rows.length - 1 && "border-b border-border",
-              )}
-            >
-              {row.map((cell, idx) => (
-                <View
-                  key={`${cell}-${idx}`}
-                  className={cn(
-                    "flex-1 px-4 py-3",
-                    idx < row.length - 1 && "border-r border-border",
-                  )}
-                >
-                  <Text
-                    className={cn(
-                      "text-body leading-6 text-foreground",
-                      idx === 0 && "font-semibold",
-                    )}
-                  >
-                    {cell}
-                  </Text>
-                </View>
-              ))}
-            </View>
-          ))}
-        </View>
-      ) : null}
+        );
+      })() : null}
 
       {step.bullets && step.bullets.length > 0 ? (
         <View className="gap-2.5">
@@ -949,28 +978,38 @@ function ImagePlaceholderStep({
         <RichText text={step.description} className="text-body leading-7 text-muted-foreground" />
       </View>
 
-      <View className="overflow-hidden rounded-[28px] border border-dashed border-border bg-card">
-        <View
-          className={cn("min-h-64 items-center justify-center gap-4 px-5 py-8", tone.accentSoftBg)}
-        >
+      {step.customComponent === "flowchartSimulation" ? (
+        <FlowchartStepAnimation />
+      ) : step.customComponent === "triangleFlowchart" ? (
+        <TriangleFlowchart />
+      ) : step.customComponent === "conditionalFlowchart" ? (
+        <ConditionalFlowchart />
+      ) : step.customComponent === "multiConditionalFlowchart" ? (
+        <MultiConditionalFlowchart />
+      ) : (
+        <View className="overflow-hidden rounded-[28px] border border-dashed border-border bg-card">
           <View
-            className={cn(
-              "h-16 w-16 items-center justify-center rounded-[22px] border border-black/5 dark:border-white/5",
-              tone.iconWrap,
-            )}
+            className={cn("min-h-64 items-center justify-center gap-4 px-5 py-8", tone.accentSoftBg)}
           >
-            <LucideIcon name={step.icon} size={30} className={tone.iconText} />
-          </View>
-          <View className="items-center gap-2">
-            <Text className="text-center text-h3 text-card-foreground">
-              {step.placeholderLabel}
-            </Text>
-            <Text className="max-w-sm text-center text-body leading-6 text-muted-foreground">
-              {step.note}
-            </Text>
+            <View
+              className={cn(
+                "h-16 w-16 items-center justify-center rounded-[22px] border border-black/5 dark:border-white/5",
+                tone.iconWrap,
+              )}
+            >
+              <LucideIcon name={step.icon} size={30} className={tone.iconText} />
+            </View>
+            <View className="items-center gap-2">
+              <Text className="text-center text-h3 text-card-foreground">
+                {step.placeholderLabel}
+              </Text>
+              <Text className="max-w-sm text-center text-body leading-6 text-muted-foreground">
+                {step.note}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
+      )}
     </View>
   );
 }
