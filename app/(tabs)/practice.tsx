@@ -17,8 +17,8 @@ type PracticeMode = {
 const practiceModes: PracticeMode[] = [
   {
     id: "flash",
-    title: "Flash drills",
-    description: "Abre temas de tarjetas para repasar sintaxis y conceptos clave.",
+    title: "Flash Cards",
+    description: "Tarjetas para repasar conceptos clave.",
     icon: "Zap",
     accentClassName: "bg-sky-400",
     iconBackgroundClassName: "bg-sky-100 dark:bg-sky-950",
@@ -26,8 +26,8 @@ const practiceModes: PracticeMode[] = [
   },
   {
     id: "logic",
-    title: "Logic puzzles",
-    description: "Mini retos guiados para pensar antes de escribir código.",
+    title: "Errores",
+    description: "Repasa tus errores recientes.",
     icon: "Puzzle",
     accentClassName: "bg-emerald-300",
     iconBackgroundClassName: "bg-emerald-100 dark:bg-emerald-950",
@@ -35,8 +35,8 @@ const practiceModes: PracticeMode[] = [
   },
   {
     id: "review",
-    title: "Quick review",
-    description: "Abre temas de cuestionario para repasar lo que viste hoy.",
+    title: "Cuestionarios",
+    description: "Practica con preguntas rápidas.",
     icon: "History",
     accentClassName: "bg-violet-300",
     iconBackgroundClassName: "bg-violet-100 dark:bg-violet-950",
@@ -47,16 +47,6 @@ const practiceModes: PracticeMode[] = [
 export default function PracticeTabScreen() {
   return (
     <Screen scroll contentClassName="gap-6 pb-12">
-      <View className="items-center rounded-[32px] bg-sky-50 px-6 py-8 dark:bg-sky-950/50">
-        <Text className="text-center text-h1 leading-10 text-foreground">
-          Practica sin salir de ritmo
-        </Text>
-        <Text className="mt-3 text-center text-body leading-7 text-muted-foreground">
-          Refuerza tus conocimientos con ejercicios interactivos y repasos diseñados para mejorar
-          tus habilidades.
-        </Text>
-      </View>
-
       <View className="gap-4">
         {practiceModes.map((mode) => {
           const opensFlashcards = mode.id === "flash";
@@ -78,7 +68,7 @@ export default function PracticeTabScreen() {
                   router.push("/practice/quiz-topics");
                 }
               }}
-              className="relative min-h-40 overflow-hidden rounded-[28px] border border-border/70 bg-card px-6 py-6 shadow-sm active:opacity-90"
+              className="relative min-h-32 overflow-hidden rounded-[28px] border border-border/70 bg-card px-6 py-4 shadow-sm active:opacity-90"
             >
               <View className={`absolute bottom-0 left-0 top-0 w-1.5 ${mode.accentClassName}`} />
               <View className="flex-1 flex-row items-center gap-5">

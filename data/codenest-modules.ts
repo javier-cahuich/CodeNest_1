@@ -83,6 +83,11 @@ export type LessonStep =
       placeholderLabel: string;
       note: string;
       icon: IconName;
+      customComponent?:
+        | "flowchartSimulation"
+        | "triangleFlowchart"
+        | "conditionalFlowchart"
+        | "multiConditionalFlowchart";
     }
   | {
       kind: "practice";
@@ -371,16 +376,34 @@ const representacionAlgoritmosSteps: LessonStep[] = [
     title: "¿Qué es un diagrama de flujo?",
     description:
       "Un diagrama de flujo es la representación gráfica de un algoritmo. Se basa en símbolos para representar operaciones, y la secuencia de cada operación se establece mediante líneas que las interconectan.",
-    placeholderLabel: "Imagen pendiente",
-    note: "Aquí irá la imagen introductoria que agregarás después.",
+    placeholderLabel: "Diagrama interactivo",
+    note: "Simulación del flujo de datos y procesos en un algoritmo.",
     icon: "GitBranch",
+    customComponent: "flowchartSimulation",
   },
   {
-    kind: "blank",
+    kind: "theory",
     eyebrow: "Simbología · 3 de 11",
     title: "Simbología",
-    message: "Pantalla reservada para agregar la simbología de diagramas de flujo.",
-    icon: "Shapes",
+    description:
+      "Cada figura geométrica en un diagrama de flujo cumple una función estandarizada para describir las acciones de un algoritmo:",
+    table: {
+      headers: ["Figura", "Nombre", "¿Que representa?"],
+      rows: [
+        ["1.inicio-fin", "inicio/fin", "El inicio y final de un proceso"],
+        [
+          "2.entradaSalidad",
+          "entrada/Salida",
+          "La lectura de datos en la entrada y la impresion de datos en la salida",
+        ],
+        ["3.proceso", "proceso", "Cualquier tipo de operacion"],
+        [
+          "4.decicion",
+          "desicion",
+          "un punto donde se debe tomar una elección.",
+        ],
+      ],
+    },
   },
   {
     kind: "imagePlaceholder",
@@ -388,9 +411,10 @@ const representacionAlgoritmosSteps: LessonStep[] = [
     title: "Algoritmo de ejemplo",
     description:
       "A continuación se muestra el diagrama de flujo para calcular el área de un triángulo.",
-    placeholderLabel: "Diagrama pendiente",
-    note: "Aquí irá la imagen del diagrama de flujo del área de un triángulo.",
-    icon: "ImagePlus",
+    placeholderLabel: "Diagrama del área de un triángulo",
+    note: "Flujo paso a paso para el cálculo del área utilizando entrada, proceso y salida.",
+    icon: "GitBranch",
+    customComponent: "triangleFlowchart",
   },
   {
     kind: "codeExample",
@@ -1505,11 +1529,15 @@ const estructurasCondicionalesSteps: LessonStep[] = [
     ],
   },
   {
-    kind: "blank",
+    kind: "imagePlaceholder",
     eyebrow: "Diagrama · 4 de 13",
     title: "Ejemplo en diagrama de flujo",
-    message: "Espacio reservado para agregar el diagrama de flujo de una condicional simple.",
-    icon: "Workflow",
+    description:
+      "A continuación se muestra el diagrama de flujo para evaluar si una persona es mayor o menor de edad con una estructura condicional Si / Sino.",
+    placeholderLabel: "Diagrama de condicional Si / Sino",
+    note: "Flujo de decisión basado en la condición ¿Edad >= 18? con caminos para Sí y No.",
+    icon: "GitBranch",
+    customComponent: "conditionalFlowchart",
   },
   {
     kind: "quiz",
@@ -1541,11 +1569,15 @@ const estructurasCondicionalesSteps: LessonStep[] = [
     ],
   },
   {
-    kind: "blank",
+    kind: "imagePlaceholder",
     eyebrow: "Diagrama · 7 de 13",
     title: "Ejemplo en diagrama de flujo",
-    message: "Espacio reservado para agregar el diagrama de flujo de una condicional múltiple.",
-    icon: "Workflow",
+    description:
+      "A continuación se muestra el diagrama de flujo para evaluar diferentes opciones usando una condicional múltiple (Según / Caso).",
+    placeholderLabel: "Diagrama de condicional múltiple",
+    note: "Flujo de decisiones encadenadas evaluando la variable mes para elegir el camino correcto.",
+    icon: "GitBranch",
+    customComponent: "multiConditionalFlowchart",
   },
   {
     kind: "codeExample",
