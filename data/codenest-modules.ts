@@ -270,10 +270,7 @@ const algoritmosSteps: LessonStep[] = [
       label: "Pseudocódigo",
       content: `INICIO\n1. Leer nota1, nota2 y nota3\n2. Sumar nota1 + nota2 + nota3\n3. Dividir el total entre 3\n4. Mostrar el promedio\nFIN`,
     },
-    notes: [
-      "La entrada son las tres notas.",
-      "La salida es el promedio calculado al final.",
-    ],
+    notes: ["La entrada son las tres notas.", "La salida es el promedio calculado al final."],
   },
   {
     kind: "quiz",
@@ -366,8 +363,14 @@ const representacionAlgoritmosSteps: LessonStep[] = [
     bullets: [
       { bold: "Claridad:", text: "ayudan a visualizar el orden de los pasos antes de programar." },
       { bold: "Comunicación:", text: "facilitan explicar una solución a otras personas." },
-      { bold: "Detección de errores:", text: "permiten encontrar pasos faltantes o decisiones confusas temprano." },
-      { bold: "Traducción a código:", text: "sirven como puente entre la idea y el programa final." },
+      {
+        bold: "Detección de errores:",
+        text: "permiten encontrar pasos faltantes o decisiones confusas temprano.",
+      },
+      {
+        bold: "Traducción a código:",
+        text: "sirven como puente entre la idea y el programa final.",
+      },
     ],
   },
   {
@@ -397,11 +400,7 @@ const representacionAlgoritmosSteps: LessonStep[] = [
           "La lectura de datos en la entrada y la impresion de datos en la salida",
         ],
         ["3.proceso", "proceso", "Cualquier tipo de operacion"],
-        [
-          "4.decicion",
-          "desicion",
-          "un punto donde se debe tomar una elección.",
-        ],
+        ["4.decicion", "desicion", "un punto donde se debe tomar una elección."],
       ],
     },
   },
@@ -420,8 +419,7 @@ const representacionAlgoritmosSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Pseudocódigo · 5 de 11",
     title: "Equivalencia en pseudocódigo",
-    description:
-      "El diagrama anterior es equivalente al siguiente pseudocódigo:",
+    description: "El diagrama anterior es equivalente al siguiente pseudocódigo:",
     code: {
       label: "Algoritmo CalcularAreaTriangulo",
       content: `Algoritmo CalcularAreaTriangulo\n    // 1. Declaración de variables (Definir el tipo de datos)\n    Definir base, altura, area Como Real\n\n    // 2. Entrada de datos (paralelogramo del diagrama)\n    Escribir "Por favor, ingresa la base del triángulo:"\n    Leer base\n\n    Escribir "Por favor, ingresa la altura del triángulo:"\n    Leer altura\n\n    // 3. Proceso / Cálculo (Rectángulo del diagrama)\n    area <- (base * altura) / 2\n\n    // 4. Salida de datos (Equivale al paralelogramo final)\n    Escribir "El área del triángulo es: ", area\n\nFinAlgoritmo`,
@@ -664,8 +662,7 @@ const pseudocodigoSteps: LessonStep[] = [
     kind: "blockPuzzle",
     eyebrow: "Ejercicio 2 · 10 de 12",
     title: "Ordena una decisión con Si...Entonces",
-    instructions:
-      "Acomoda los bloques para decidir si una persona puede entrar según su edad.",
+    instructions: "Acomoda los bloques para decidir si una persona puede entrar según su edad.",
     blocks: [
       { id: "inicio", text: "INICIO" },
       { id: "leer", text: "Leer edad" },
@@ -709,7 +706,10 @@ const estructuraProgramaSteps: LessonStep[] = [
       "Un programa es un conjunto de instrucciones escritas en un lenguaje de programación. Esas instrucciones implementan uno o más algoritmos para que una computadora pueda ejecutarlos.",
     bullets: [
       { bold: "Librerías:", text: "herramientas externas que el programa puede usar." },
-      { bold: "Declaración de datos:", text: "variables y constantes que reservan o nombran información." },
+      {
+        bold: "Declaración de datos:",
+        text: "variables y constantes que reservan o nombran información.",
+      },
       { bold: "Cuerpo:", text: "la sección principal donde se ejecuta el algoritmo." },
       { bold: "Subprogramas:", text: "bloques independientes que resuelven tareas específicas." },
     ],
@@ -780,9 +780,18 @@ const estructuraProgramaSteps: LessonStep[] = [
     description:
       "Es el corazón del software. Aquí adentro vive el algoritmo. La computadora entra a esta sección y empieza a ejecutar las instrucciones línea por línea, de arriba hacia abajo.",
     bullets: [
-      { bold: "Entrada de datos (input):", text: 'le pide información al usuario, por ejemplo: "Escribe tu nombre".' },
-      { bold: "Proceso:", text: "realiza cálculos, toma decisiones con Si/Sino y repite tareas si hace falta." },
-      { bold: "Salida de datos (output):", text: 'muestra el resultado final, por ejemplo: "Bienvenido, Carlos".' },
+      {
+        bold: "Entrada de datos (input):",
+        text: 'le pide información al usuario, por ejemplo: "Escribe tu nombre".',
+      },
+      {
+        bold: "Proceso:",
+        text: "realiza cálculos, toma decisiones con Si/Sino y repite tareas si hace falta.",
+      },
+      {
+        bold: "Salida de datos (output):",
+        text: 'muestra el resultado final, por ejemplo: "Bienvenido, Carlos".',
+      },
     ],
   },
   {
@@ -796,7 +805,7 @@ const estructuraProgramaSteps: LessonStep[] = [
         icon: "Calculator",
         title: "Ejemplo: calcular un descuento",
         description:
-          'Puedes crear una función pequeña que solo sirva para calcular un descuento. Cada vez que el cuerpo principal la necesite, la llama, le pasa los datos, la función hace el cálculo y regresa el resultado.',
+          "Puedes crear una función pequeña que solo sirva para calcular un descuento. Cada vez que el cuerpo principal la necesite, la llama, le pasa los datos, la función hace el cálculo y regresa el resultado.",
       },
     ],
   },
@@ -805,7 +814,10 @@ const estructuraProgramaSteps: LessonStep[] = [
     eyebrow: "Pregunta 2 · 8 de 15",
     question: "¿Para qué sirven principalmente los subprogramas?",
     options: [
-      { id: "a", label: "Para repetir tareas específicas sin escribir el mismo código muchas veces." },
+      {
+        id: "a",
+        label: "Para repetir tareas específicas sin escribir el mismo código muchas veces.",
+      },
       { id: "b", label: "Para borrar todas las variables antes de ejecutar el programa." },
       { id: "c", label: "Para reemplazar las librerías externas." },
       { id: "d", label: "Para que los comentarios sí sean ejecutados por la computadora." },
@@ -949,8 +961,16 @@ const variablesConstantesSteps: LessonStep[] = [
     table: {
       headers: ["Aspecto", "Variable", "Constante"],
       rows: [
-        ["Cambio de valor", "Puede cambiar durante la ejecución.", "No debe cambiar después de iniciar el programa."],
-        ["Uso común", "Datos ingresados, contadores, resultados temporales.", "Valores fijos como PI, IVA o límites."],
+        [
+          "Cambio de valor",
+          "Puede cambiar durante la ejecución.",
+          "No debe cambiar después de iniciar el programa.",
+        ],
+        [
+          "Uso común",
+          "Datos ingresados, contadores, resultados temporales.",
+          "Valores fijos como PI, IVA o límites.",
+        ],
         ["Ejemplo", "edad = 20", "PI = 3.1416"],
         ["Idea mental", "Una caja que puedes abrir y actualizar.", "Una caja cerrada con candado."],
       ],
@@ -977,11 +997,23 @@ const variablesConstantesSteps: LessonStep[] = [
     description:
       "Un buen nombre permite entender qué guarda el dato sin tener que adivinarlo. Estas reglas reducen errores y hacen que el programa sea más fácil de leer.",
     bullets: [
-      { bold: "Usa nombres descriptivos:", text: "deben indicar claramente qué información almacenan." },
-      { bold: "No utilices espacios:", text: "une las palabras con un estilo claro, como camelCase." },
+      {
+        bold: "Usa nombres descriptivos:",
+        text: "deben indicar claramente qué información almacenan.",
+      },
+      {
+        bold: "No utilices espacios:",
+        text: "une las palabras con un estilo claro, como camelCase.",
+      },
       { bold: "Evita caracteres especiales:", text: "no uses acentos, símbolos ni la letra ñ." },
-      { bold: "No uses palabras reservadas:", text: "evita nombres que el lenguaje ya usa para instrucciones propias." },
-      { bold: "Usa camelCase para variables:", text: "por ejemplo nombreUsuario o fechaNacimiento." },
+      {
+        bold: "No uses palabras reservadas:",
+        text: "evita nombres que el lenguaje ya usa para instrucciones propias.",
+      },
+      {
+        bold: "Usa camelCase para variables:",
+        text: "por ejemplo nombreUsuario o fechaNacimiento.",
+      },
     ],
   },
   {
@@ -1121,6 +1153,225 @@ const variablesConstantesSteps: LessonStep[] = [
   },
 ];
 
+const usoVariablesConstantesSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 13",
+    title: "Del nombre al dato útil",
+    paragraphs: [
+      "Ya sabes distinguir una variable de una constante. Ahora aprenderás a **usarlas paso a paso** para que los datos entren al programa, se actualicen y produzcan un resultado.",
+      "El primer paso es declarar el nombre y darle un valor inicial. A partir de ahí, el programa puede consultar ese valor o reemplazarlo cuando la situación cambie.",
+    ],
+    code: {
+      label: "Declarar e inicializar",
+      content: `Definir puntos Como Entero\npuntos <- 0\n\nConstante PUNTOS_POR_RETO <- 10`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Proceso · 2 de 13",
+    title: "Cuatro acciones con un dato",
+    description:
+      "Una variable resulta útil cuando puedes seguir con claridad qué ocurre con su valor en cada instrucción.",
+    table: {
+      headers: ["Acción", "Qué hace", "Ejemplo"],
+      rows: [
+        ["Declarar", "Reserva un nombre para el dato.", "Definir puntos Como Entero"],
+        ["Inicializar", "Asigna el primer valor.", "puntos <- 0"],
+        ["Consultar", "Usa el valor actual sin cambiarlo.", "Escribir puntos"],
+        ["Reasignar", "Sustituye el valor anterior por uno nuevo.", "puntos <- puntos + 10"],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Seguimiento · 3 de 13",
+    title: "El valor actual de una variable",
+    description:
+      "Cada reasignación parte del valor que la variable tiene en ese momento. El valor anterior se reemplaza, pero puede participar en el cálculo del nuevo.",
+    code: {
+      label: "Pseudocódigo",
+      content: `puntos <- 0          // valor actual: 0\npuntos <- puntos + 10 // valor actual: 10\npuntos <- puntos + 5  // valor actual: 15\n\nEscribir puntos`,
+    },
+    notes: [
+      "La expresión de la derecha se calcula primero.",
+      "Después, el resultado se guarda nuevamente en puntos.",
+      "Al final solo permanece el valor más reciente: 15.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 1 · 4 de 13",
+    question: "¿Qué valor muestra este algoritmo?",
+    code: {
+      label: "Pseudocódigo",
+      content: `vidas <- 3\nvidas <- vidas - 1\nvidas <- vidas + 2\nEscribir vidas`,
+    },
+    options: [
+      { id: "a", label: "2" },
+      { id: "b", label: "3" },
+      { id: "c", label: "4" },
+      { id: "d", label: "6" },
+    ],
+    correctId: "c",
+    explanation:
+      "vidas inicia en 3, baja a 2 y después aumenta a 4. Cada instrucción trabaja con el valor actualizado.",
+  },
+  {
+    kind: "tip",
+    eyebrow: "Prevención · 5 de 13",
+    title: "Inicializa antes de usar",
+    body: "Una variable sin valor inicial puede producir resultados impredecibles o errores. Los contadores suelen iniciar en 0; los acumuladores también, salvo que el problema indique otro punto de partida.",
+    icon: "ShieldCheck",
+    variant: "warning",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Constantes · 6 de 13",
+    title: "Evita los números mágicos",
+    description:
+      "Un número mágico aparece directamente en una operación sin explicar qué representa. Convertirlo en constante documenta la regla y permite reutilizarla sin inconsistencias.",
+    code: {
+      label: "Pseudocódigo claro",
+      content: `Constante PUNTOS_POR_RETO <- 10\n\npuntos <- 20\npuntos <- puntos + PUNTOS_POR_RETO\n\nEscribir puntos`,
+    },
+    notes: [
+      "PUNTOS_POR_RETO explica por qué se suman 10 puntos.",
+      "Si la regla cambia, el valor se actualiza en un solo lugar.",
+      "La variable puntos conserva el estado que sí cambia.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 2 · 7 de 13",
+    question: "¿Cuál instrucción rompe la intención de una constante?",
+    code: {
+      label: "Pseudocódigo",
+      content: `Constante LIMITE_INTENTOS <- 3\nintentosUsados <- 1`,
+    },
+    options: [
+      { id: "a", label: "Escribir LIMITE_INTENTOS" },
+      { id: "b", label: "intentosUsados <- intentosUsados + 1" },
+      { id: "c", label: "intentosRestantes <- LIMITE_INTENTOS - intentosUsados" },
+      { id: "d", label: "LIMITE_INTENTOS <- 5" },
+    ],
+    correctId: "d",
+    explanation:
+      "LIMITE_INTENTOS representa una regla fija y no debe reasignarse. Si debe cambiar durante la ejecución, entonces fue modelado con la categoría equivocada.",
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Ejercicio · 8 de 13",
+    title: "Construye el seguimiento",
+    instructions:
+      "Elige la instrucción que cumple cada objetivo. Después, comprueba las tres respuestas.",
+    questions: [
+      {
+        id: "iniciar-contador",
+        question: "¿Cómo iniciarías un contador de visitas?",
+        options: [
+          { id: "a", label: "visitas <- 0" },
+          { id: "b", label: "visitas <- visitas + 1" },
+          { id: "c", label: "Constante visitas <- 0" },
+        ],
+        correctId: "a",
+        explanation: "El contador necesita un valor inicial conocido antes de incrementarse.",
+      },
+      {
+        id: "registrar-visita",
+        question: "¿Cómo registrarías una nueva visita?",
+        options: [
+          { id: "a", label: "visitas <- 0" },
+          { id: "b", label: "visitas <- visitas + 1" },
+          { id: "c", label: "Escribir visitas + 1" },
+        ],
+        correctId: "b",
+        explanation: "La reasignación guarda el nuevo total; escribirlo solamente lo mostraría.",
+      },
+      {
+        id: "calcular-disponibles",
+        question: "¿Cómo guardarías los lugares disponibles?",
+        options: [
+          { id: "a", label: "disponibles <- CUPO_MAXIMO - inscritos" },
+          { id: "b", label: "CUPO_MAXIMO <- CUPO_MAXIMO - inscritos" },
+          { id: "c", label: "inscritos <- CUPO_MAXIMO" },
+        ],
+        correctId: "a",
+        explanation:
+          "El resultado se guarda en una variable nueva sin modificar la regla fija CUPO_MAXIMO.",
+      },
+    ],
+    explanation:
+      "Inicializar establece el punto de partida, reasignar conserva un cambio y calcular un dato derivado mantiene intactas las constantes.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Caso aplicado · 9 de 13",
+    title: "Seguimiento de una meta de ahorro",
+    description:
+      "Este algoritmo combina una meta fija, el estado actual del ahorro, una entrada nueva y dos resultados actualizados.",
+    code: {
+      label: "Pseudocódigo",
+      content: `Algoritmo ActualizarAhorro\n\nConstante META_AHORRO <- 1000\n\nDefinir ahorroActual Como Real\nDefinir deposito Como Real\nDefinir faltante Como Real\n\nahorroActual <- 250\n\nEscribir "Ingrese el nuevo depósito:"\nLeer deposito\n\nahorroActual <- ahorroActual + deposito\nfaltante <- META_AHORRO - ahorroActual\n\nEscribir "Ahorro acumulado: ", ahorroActual\nEscribir "Falta para la meta: ", faltante\n\nFinAlgoritmo`,
+    },
+    notes: [
+      "META_AHORRO no cambia durante la ejecución.",
+      "deposito recibe el dato de entrada y ahorroActual conserva el nuevo estado.",
+      "faltante es una variable derivada: se vuelve a calcular a partir de los valores actuales.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 3 · 10 de 13",
+    question: "Si el depósito es de 200, ¿qué valores mostrará el algoritmo?",
+    options: [
+      { id: "a", label: "Ahorro acumulado: 200 · Falta: 800" },
+      { id: "b", label: "Ahorro acumulado: 250 · Falta: 750" },
+      { id: "c", label: "Ahorro acumulado: 450 · Falta: 550" },
+      { id: "d", label: "Ahorro acumulado: 1000 · Falta: 0" },
+    ],
+    correctId: "c",
+    explanation:
+      "El ahorro pasa de 250 a 450 al sumar el depósito. Después, faltante se calcula como 1000 - 450, que da 550.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Ejercicio aplicado · 11 de 13",
+    title: "Ordena el flujo de los datos",
+    instructions:
+      "Ordena las instrucciones para iniciar el ahorro, recibir un depósito, actualizar el total y calcular cuánto falta.",
+    blocks: [
+      { id: "initial", text: "ahorroActual <- 250" },
+      { id: "input", text: "Leer deposito" },
+      { id: "update", text: "ahorroActual <- ahorroActual + deposito" },
+      { id: "derived", text: "faltante <- META_AHORRO - ahorroActual" },
+      { id: "output", text: "Escribir ahorroActual, faltante" },
+    ],
+    correctOrder: ["initial", "input", "update", "derived", "output"],
+    explanation:
+      "Primero se establece el estado inicial; luego llega la entrada, se actualiza el estado, se calcula el dato derivado y al final se muestran los resultados.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 12 de 13",
+    title: "Lo esencial del uso de datos",
+    takeaways: [
+      "Declarar crea el nombre e inicializar establece su primer valor.",
+      "Reasignar reemplaza el valor anterior de una variable por un resultado nuevo.",
+      "Una variable debe inicializarse antes de participar en cálculos o actualizaciones.",
+      "Las constantes nombran reglas fijas y evitan números mágicos dentro del algoritmo.",
+      "Un caso aplicado conecta estado inicial, entrada, actualización, resultado derivado y salida.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 13 de 13",
+    title: "Pantalla de retroalimentación",
+    message:
+      "Revisa tus respuestas para confirmar que puedes inicializar, actualizar y seguir variables sin modificar las constantes del problema.",
+  },
+];
+
 const tiposDatosSteps: LessonStep[] = [
   {
     kind: "concept",
@@ -1237,8 +1488,7 @@ const tiposDatosSteps: LessonStep[] = [
       { id: "d", label: "Lógico" },
     ],
     correctId: "c",
-    explanation:
-      "estatura se define como Real porque guarda 1.68, un número con parte decimal.",
+    explanation: "estatura se define como Real porque guarda 1.68, un número con parte decimal.",
   },
   {
     kind: "quiz",
@@ -1296,8 +1546,14 @@ const operadoresSteps: LessonStep[] = [
     description:
       "Los operadores permiten que un programa transforme valores, los compare o combine condiciones para decidir qué hacer.",
     bullets: [
-      { bold: "Operaciones matemáticas:", text: "suma, resta, multiplicación, división y residuo." },
-      { bold: "Comparación de valores:", text: "permiten saber si un dato es mayor, menor, igual o diferente." },
+      {
+        bold: "Operaciones matemáticas:",
+        text: "suma, resta, multiplicación, división y residuo.",
+      },
+      {
+        bold: "Comparación de valores:",
+        text: "permiten saber si un dato es mayor, menor, igual o diferente.",
+      },
       { bold: "Toma de decisiones:", text: "sus resultados ayudan a ejecutar una ruta u otra." },
       { bold: "Condiciones combinadas:", text: "unen varias reglas en una sola evaluación." },
       { bold: "Modificación de variables:", text: "actualizan un valor y lo guardan de nuevo." },
@@ -1379,8 +1635,7 @@ const operadoresSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Lógicos · 7 de 13",
     title: "Operadores lógicos",
-    description:
-      "Permiten combinar dos o más condiciones para construir reglas más completas.",
+    description: "Permiten combinar dos o más condiciones para construir reglas más completas.",
     table: {
       headers: ["Operador", "Significado"],
       rows: [
@@ -1583,8 +1838,7 @@ const estructurasCondicionalesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "JavaScript · 8 de 13",
     title: "Ejemplo en un lenguaje de programación",
-    description:
-      "A continuación un ejemplo de condicional múltiple (switch) en JavaScript.",
+    description: "A continuación un ejemplo de condicional múltiple (switch) en JavaScript.",
     code: {
       label: "JavaScript",
       content: `let opcion = 2;\n\nswitch(opcion) {\n\ncase 1:\n    console.log("Registrar usuario");\n    break;\n\ncase 2:\n    console.log("Consultar usuario");\n    break;\n\ncase 3:\n    console.log("Salir");\n    break;\n\n}`,
@@ -1620,8 +1874,7 @@ const estructurasCondicionalesSteps: LessonStep[] = [
       { id: "d", label: "Opción inválida" },
     ],
     correctId: "b",
-    explanation:
-      "Como opcion vale 2, se ejecuta case 2 y el programa muestra Consultar usuario.",
+    explanation: "Como opcion vale 2, se ejecuta case 2 y el programa muestra Consultar usuario.",
   },
   {
     kind: "choiceSet",
@@ -1707,7 +1960,10 @@ const estructurasBuclesSteps: LessonStep[] = [
     description:
       'Si las condicionales (Si/Sino) son el "cerebro" que toma decisiones, los bucles son el "músculo" de la programación: le permiten a una computadora realizar millones de tareas repetitivas en milisegundos sin cansarse y sin equivocarse.',
     bullets: [
-      { bold: "Bucle mientras (while):", text: "repite instrucciones mientras una condición sea verdadera." },
+      {
+        bold: "Bucle mientras (while):",
+        text: "repite instrucciones mientras una condición sea verdadera.",
+      },
       {
         bold: "Bucle hacer...mientras (do-while):",
         text: "ejecuta primero y luego revisa si debe repetir.",
@@ -1773,8 +2029,7 @@ const estructurasBuclesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "While · 5 de 16",
     title: "Ejemplo: pedir una contraseña",
-    description:
-      "Problema: pedir una contraseña hasta que sea correcta.",
+    description: "Problema: pedir una contraseña hasta que sea correcta.",
     code: {
       label: "Pseudocódigo",
       content: `Inicio\nLeer contraseña\nMientras contraseña ≠ "1234" Hacer\n    Escribir "Contraseña incorrecta"\n    Leer contraseña\nFin Mientras\nEscribir "Acceso permitido"\nFin`,
@@ -1794,9 +2049,7 @@ const estructurasBuclesSteps: LessonStep[] = [
       label: "Consola",
       content: `Ingrese contraseña:\n1111\nContraseña incorrecta\nIngrese contraseña:\n0000\nContraseña incorrecta\nIngrese contraseña:\n1234\nAcceso permitido`,
     },
-    notes: [
-      "El bucle termina cuando la condición contraseña ≠ \"1234\" deja de ser verdadera.",
-    ],
+    notes: ['El bucle termina cuando la condición contraseña ≠ "1234" deja de ser verdadera.'],
   },
   {
     kind: "codeExample",
@@ -1817,16 +2070,12 @@ const estructurasBuclesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Do-while · 8 de 16",
     title: "Ejemplo: mostrar un menú",
-    description:
-      "Problema: mostrar un menú hasta que el usuario elija salir.",
+    description: "Problema: mostrar un menú hasta que el usuario elija salir.",
     code: {
       label: "Pseudocódigo",
       content: `Inicio\n\nRepetir\n\n    Escribir "1. Consultar saldo"\n\n    Escribir "2. Depositar"\n\n    Escribir "3. Salir"\n\n    Leer opcion\n\nHasta Que opcion = 3\n\nEscribir "Programa finalizado"\n\nFin`,
     },
-    notes: [
-      "El menú aparece al menos una vez.",
-      "El bucle termina cuando opcion vale 3.",
-    ],
+    notes: ["El menú aparece al menos una vez.", "El bucle termina cuando opcion vale 3."],
   },
   {
     kind: "codeExample",
@@ -1847,16 +2096,12 @@ const estructurasBuclesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "For · 10 de 16",
     title: "Ejemplo: mostrar números",
-    description:
-      "Problema: mostrar los números del 1 al 5.",
+    description: "Problema: mostrar los números del 1 al 5.",
     code: {
       label: "Pseudocódigo",
       content: `Inicio\n\nPara contador ← 1 Hasta 5 Hacer\n\n    Escribir contador\n\nFin Para\n\nFin`,
     },
-    notes: [
-      "El bucle se repite cinco veces.",
-      "En cada vuelta, contador toma el siguiente valor.",
-    ],
+    notes: ["El bucle se repite cinco veces.", "En cada vuelta, contador toma el siguiente valor."],
   },
   {
     kind: "theory",
@@ -2145,7 +2390,8 @@ const arreglosSteps: LessonStep[] = [
       },
       {
         id: "primer-elemento",
-        question: "¿Qué instrucción permite acceder al primer elemento de un arreglo llamado numeros?",
+        question:
+          "¿Qué instrucción permite acceder al primer elemento de un arreglo llamado numeros?",
         options: [
           { id: "a", label: "A) numeros(1)" },
           { id: "b", label: "B) numeros[0]" },
@@ -2211,10 +2457,7 @@ const vectoresSteps: LessonStep[] = [
       label: "Pseudocódigo",
       content: `Definir numeros Como Entero\nDimension numeros[5]`,
     },
-    notes: [
-      "Esto crea un vector llamado numeros.",
-      "El vector tiene espacio para cinco enteros.",
-    ],
+    notes: ["Esto crea un vector llamado numeros.", "El vector tiene espacio para cinco enteros."],
   },
   {
     kind: "theory",
@@ -2252,8 +2495,7 @@ const vectoresSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Contenido · 5 de 13",
     title: "Ahora el vector contiene",
-    description:
-      "Después de las asignaciones, el vector edades queda organizado así:",
+    description: "Después de las asignaciones, el vector edades queda organizado así:",
     table: {
       headers: ["Índice", "Valor"],
       rows: [
@@ -2363,7 +2605,8 @@ const vectoresSteps: LessonStep[] = [
       },
       {
         id: "recorrido-cantidad",
-        question: "Si un vector tiene 5 elementos con índices 0 a 4, ¿cuántas vueltas necesita el ciclo para recorrerlo completo?",
+        question:
+          "Si un vector tiene 5 elementos con índices 0 a 4, ¿cuántas vueltas necesita el ciclo para recorrerlo completo?",
         options: [
           { id: "a", label: "A) 4" },
           { id: "b", label: "B) 5" },
@@ -2391,8 +2634,7 @@ const vectoresSteps: LessonStep[] = [
       { id: "d", label: "D) 12" },
     ],
     correctId: "a",
-    explanation:
-      "numeros[0] vale 4 y numeros[2] vale 2. Por eso suma = 4 + 2 = 6.",
+    explanation: "numeros[0] vale 4 y numeros[2] vale 2. Por eso suma = 4 + 2 = 6.",
   },
   {
     kind: "recap",
@@ -2456,8 +2698,7 @@ const matricesSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Comparación · 3 de 15",
     title: "Diferencia con un vector",
-    description:
-      "A continuación un resumen de las diferencias entre una matriz y un vector:",
+    description: "A continuación un resumen de las diferencias entre una matriz y un vector:",
     table: {
       headers: ["Vector", "Matriz"],
       rows: [
@@ -2536,8 +2777,7 @@ const matricesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Asignación · 7 de 15",
     title: "Guardar valores en una matriz",
-    description:
-      "Para almacenar información se especifican la fila y la columna.",
+    description: "Para almacenar información se especifican la fila y la columna.",
     code: {
       label: "Pseudocódigo",
       content: `matriz[0][0] <- 5\nmatriz[0][1] <- 8\nmatriz[1][0] <- 10`,
@@ -2573,8 +2813,7 @@ const matricesSteps: LessonStep[] = [
       { id: "d", label: "D) Vacío" },
     ],
     correctId: "c",
-    explanation:
-      "matriz[1][0] indica fila 1, columna 0. En el ejemplo, ahí se guardó el valor 10.",
+    explanation: "matriz[1][0] indica fila 1, columna 0. En el ejemplo, ahí se guardó el valor 10.",
   },
   {
     kind: "codeExample",
@@ -2595,8 +2834,7 @@ const matricesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Ejemplo · 11 de 15",
     title: "Ejemplo completo: llenar una matriz",
-    description:
-      "Crear una matriz de 3x3 y guardar números.",
+    description: "Crear una matriz de 3x3 y guardar números.",
     code: {
       label: "Pseudocódigo",
       content: `Definir numeros Como Entero\nDimension numeros[3][3]\n\nPara fila <- 0 Hasta 2 Hacer\n\n    Para columna <- 0 Hasta 2 Hacer\n\n        Escribir "Ingrese un número:"\n        Leer numeros[fila][columna]\n\n    FinPara\n\nFinPara`,
@@ -2632,8 +2870,7 @@ const matricesSteps: LessonStep[] = [
       { id: "d", label: "D) 12" },
     ],
     correctId: "c",
-    explanation:
-      "Una matriz de 3 filas por 3 columnas puede almacenar 3 x 3 = 9 valores.",
+    explanation: "Una matriz de 3 filas por 3 columnas puede almacenar 3 x 3 = 9 valores.",
   },
   {
     kind: "recap",
@@ -2674,11 +2911,12 @@ const variablesSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Teoría · 2 de 12",
     title: "Tipos de datos primitivos",
-    description: "En JavaScript hay tres tipos básicos que verás todos los días. Cada uno representa una clase distinta de información.",
+    description:
+      "En JavaScript hay tres tipos básicos que verás todos los días. Cada uno representa una clase distinta de información.",
     table: {
       headers: ["Tipo", "Ejemplos"],
       rows: [
-        ["string", '"Ana", \'hola\''],
+        ["string", "\"Ana\", 'hola'"],
         ["number", "19, 3.14, -7"],
         ["boolean", "true, false"],
       ],
@@ -2693,7 +2931,8 @@ const variablesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Teoría + código · 3 de 12",
     title: "Declarando variables con const y let",
-    description: "Usamos const para valores fijos y let cuando el valor puede cambiar más adelante.",
+    description:
+      "Usamos const para valores fijos y let cuando el valor puede cambiar más adelante.",
     code: {
       label: "JavaScript",
       content: `const nombre = "Ana";\nconst edad = 19;\nlet puntos = 0;\n\npuntos = puntos + 10;\nconsole.log(nombre, edad, puntos);`,
@@ -2707,7 +2946,8 @@ const variablesSteps: LessonStep[] = [
     kind: "practice",
     eyebrow: "Teoría + práctica · 4 de 12",
     title: "Elegir const o let",
-    explanation: "Usa **const** por defecto. Solo cambia a **let** cuando sepas que el valor va a cambiar durante la ejecución.",
+    explanation:
+      "Usa **const** por defecto. Solo cambia a **let** cuando sepas que el valor va a cambiar durante la ejecución.",
     question: "¿Cómo declararías la edad de un usuario que no va a cambiar?",
     options: [
       { id: "a", label: "var edad = 19;" },
@@ -2716,13 +2956,15 @@ const variablesSteps: LessonStep[] = [
       { id: "d", label: "edad = 19;" },
     ],
     correctId: "c",
-    answerExplanation: "Si el valor no va a cambiar, const es la mejor opción: comunica intención y previene reasignaciones por error.",
+    answerExplanation:
+      "Si el valor no va a cambiar, const es la mejor opción: comunica intención y previene reasignaciones por error.",
   },
   {
     kind: "practice",
     eyebrow: "Teoría + práctica · 5 de 12",
     title: "Reconocer tipos de datos",
-    explanation: "Cada valor en JavaScript tiene un **tipo** que define qué operaciones puedes hacer con él. Reconocerlo rápido te ahorra muchos errores.",
+    explanation:
+      "Cada valor en JavaScript tiene un **tipo** que define qué operaciones puedes hacer con él. Reconocerlo rápido te ahorra muchos errores.",
     question: "¿Qué tipo de dato es el valor true?",
     options: [
       { id: "a", label: "string (texto)" },
@@ -2731,7 +2973,8 @@ const variablesSteps: LessonStep[] = [
       { id: "d", label: "variable" },
     ],
     correctId: "c",
-    answerExplanation: "true y false son los dos únicos valores booleanos. Sirven para representar lógica de sí/no.",
+    answerExplanation:
+      "true y false son los dos únicos valores booleanos. Sirven para representar lógica de sí/no.",
   },
   {
     kind: "tip",
@@ -2756,7 +2999,8 @@ const variablesSteps: LessonStep[] = [
       { id: "d", label: "Se convierte automáticamente en let." },
     ],
     correctId: "b",
-    explanation: "const fija la referencia. Si necesitas cambiar el valor, declárala con let desde el inicio.",
+    explanation:
+      "const fija la referencia. Si necesitas cambiar el valor, declárala con let desde el inicio.",
   },
   {
     kind: "quiz",
@@ -2816,7 +3060,8 @@ const variablesSteps: LessonStep[] = [
     kind: "completion",
     eyebrow: "¡Lección completada!",
     title: "Bien hecho, sigues avanzando",
-    message: "Ya conoces las piezas básicas para guardar información. Ahora veamos cómo tu programa toma decisiones.",
+    message:
+      "Ya conoces las piezas básicas para guardar información. Ahora veamos cómo tu programa toma decisiones.",
   },
 ];
 
@@ -2838,7 +3083,8 @@ const condicionalesSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Teoría · 2 de 12",
     title: "Operadores de comparación",
-    description: "Las condiciones se construyen con operadores que devuelven true o false. Estos son los que más vas a usar.",
+    description:
+      "Las condiciones se construyen con operadores que devuelven true o false. Estos son los que más vas a usar.",
     table: {
       headers: ["Operador", "Significado"],
       rows: [
@@ -2859,7 +3105,8 @@ const condicionalesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Teoría + código · 3 de 12",
     title: "if, else y else if",
-    description: "Encadena condiciones con else if para revisar varios casos. JavaScript se detiene en el primero que se cumpla.",
+    description:
+      "Encadena condiciones con else if para revisar varios casos. JavaScript se detiene en el primero que se cumpla.",
     code: {
       label: "JavaScript",
       content: `const puntaje = 88;\n\nif (puntaje >= 90) {\n  console.log("Excelente");\n} else if (puntaje >= 70) {\n  console.log("Bien");\n} else {\n  console.log("A mejorar");\n}`,
@@ -2873,7 +3120,8 @@ const condicionalesSteps: LessonStep[] = [
     kind: "practice",
     eyebrow: "Teoría + práctica · 4 de 12",
     title: "Cómo se evalúan las condiciones",
-    explanation: "Cuando la condición es **true**, entra al bloque del if. Cuando es **false**, salta al else (si existe).",
+    explanation:
+      "Cuando la condición es **true**, entra al bloque del if. Cuando es **false**, salta al else (si existe).",
     code: {
       label: "JavaScript",
       content: `const edad = 16;\n\nif (edad >= 18) {\n  console.log("Adulto");\n} else {\n  console.log("Menor");\n}`,
@@ -2886,13 +3134,15 @@ const condicionalesSteps: LessonStep[] = [
       { id: "d", label: "Lanza un error." },
     ],
     correctId: "b",
-    answerExplanation: "16 no cumple 16 >= 18, así que entra al else. Solo uno de los dos bloques se ejecuta.",
+    answerExplanation:
+      "16 no cumple 16 >= 18, así que entra al else. Solo uno de los dos bloques se ejecuta.",
   },
   {
     kind: "practice",
     eyebrow: "Teoría + práctica · 5 de 12",
     title: "Cuándo usar === vs ==",
-    explanation: "Usa siempre **===** (igual estricto). Compara valor **y** tipo, evitando conversiones automáticas inesperadas.",
+    explanation:
+      "Usa siempre **===** (igual estricto). Compara valor **y** tipo, evitando conversiones automáticas inesperadas.",
     question: '¿Qué devuelve la expresión 5 === "5"?',
     options: [
       { id: "a", label: "true" },
@@ -2901,7 +3151,8 @@ const condicionalesSteps: LessonStep[] = [
       { id: "d", label: "Lanza un error" },
     ],
     correctId: "b",
-    answerExplanation: "Aunque los valores parecen iguales, uno es number y el otro es string. === exige que ambos tipos coincidan.",
+    answerExplanation:
+      "Aunque los valores parecen iguales, uno es number y el otro es string. === exige que ambos tipos coincidan.",
   },
   {
     kind: "tip",
@@ -2939,7 +3190,8 @@ const condicionalesSteps: LessonStep[] = [
       { id: "d", label: "<>" },
     ],
     correctId: "c",
-    explanation: "!== verifica que los valores sean distintos en valor y tipo. Es la versión estricta de !=.",
+    explanation:
+      "!== verifica que los valores sean distintos en valor y tipo. Es la versión estricta de !=.",
   },
   {
     kind: "quiz",
@@ -2952,7 +3204,8 @@ const condicionalesSteps: LessonStep[] = [
       { id: "d", label: "undefined" },
     ],
     correctId: "b",
-    explanation: "&& requiere que ambas condiciones sean true. 10 > 5 es true, pero 3 < 1 es false, así que el resultado es false.",
+    explanation:
+      "&& requiere que ambas condiciones sean true. 10 > 5 es true, pero 3 < 1 es false, así que el resultado es false.",
   },
   {
     kind: "quiz",
@@ -2969,7 +3222,7 @@ const condicionalesSteps: LessonStep[] = [
       { id: "d", label: "Nada" },
     ],
     correctId: "b",
-    explanation: "14 no cumple < 12, pero sí < 18, así que entra al else if e imprime \"Tarde\".",
+    explanation: '14 no cumple < 12, pero sí < 18, así que entra al else if e imprime "Tarde".',
   },
   {
     kind: "recap",
@@ -2986,7 +3239,8 @@ const condicionalesSteps: LessonStep[] = [
     kind: "completion",
     eyebrow: "¡Lección completada!",
     title: "Decisiones tomadas",
-    message: "Ya puedes hacer que tu código reaccione. Lo siguiente: cómo repetir acciones sin copiar y pegar.",
+    message:
+      "Ya puedes hacer que tu código reaccione. Lo siguiente: cómo repetir acciones sin copiar y pegar.",
   },
 ];
 
@@ -3008,7 +3262,8 @@ const buclesSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Teoría · 2 de 12",
     title: "Tipos de bucles",
-    description: "JavaScript tiene varios bucles. Los dos que más vas a usar son for y while. Cada uno brilla en escenarios distintos.",
+    description:
+      "JavaScript tiene varios bucles. Los dos que más vas a usar son for y while. Cada uno brilla en escenarios distintos.",
     table: {
       headers: ["Bucle", "Cuándo usarlo"],
       rows: [
@@ -3039,21 +3294,20 @@ const buclesSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Teoría + código · 3 de 12",
     title: "for clásico y while",
-    description: "El for empaqueta inicialización, condición y avance. El while solo evalúa la condición.",
+    description:
+      "El for empaqueta inicialización, condición y avance. El while solo evalúa la condición.",
     code: {
       label: "JavaScript",
       content: `for (let paso = 1; paso <= 3; paso++) {\n  console.log(\`Paso \${paso}\`);\n}\n\nlet intentos = 0;\nwhile (intentos < 3) {\n  console.log("Intento", intentos);\n  intentos++;\n}`,
     },
-    notes: [
-      "Ambos bucles imprimen tres veces.",
-      "En el while tú mismo mueves el contador.",
-    ],
+    notes: ["Ambos bucles imprimen tres veces.", "En el while tú mismo mueves el contador."],
   },
   {
     kind: "practice",
     eyebrow: "Teoría + práctica · 4 de 12",
     title: "Cuántas veces se repite un for",
-    explanation: "El bucle for repite mientras la **condición** sea verdadera. Cada vuelta se ejecuta el bloque y luego el **avance**.",
+    explanation:
+      "El bucle for repite mientras la **condición** sea verdadera. Cada vuelta se ejecuta el bloque y luego el **avance**.",
     code: {
       label: "JavaScript",
       content: `for (let i = 0; i < 5; i++) {\n  console.log(i);\n}`,
@@ -3072,7 +3326,8 @@ const buclesSteps: LessonStep[] = [
     kind: "practice",
     eyebrow: "Teoría + práctica · 5 de 12",
     title: "Elegir el bucle correcto",
-    explanation: "Usa **for** cuando conoces la cantidad de repeticiones. Usa **while** cuando esperas que cambie una condición.",
+    explanation:
+      "Usa **for** cuando conoces la cantidad de repeticiones. Usa **while** cuando esperas que cambie una condición.",
     question: "¿Cuál bucle usarías para mostrar los 10 primeros nombres de una lista?",
     options: [
       { id: "a", label: "while sin condición clara" },
@@ -3081,7 +3336,8 @@ const buclesSteps: LessonStep[] = [
       { id: "d", label: "for, pero sin salida" },
     ],
     correctId: "b",
-    answerExplanation: "for brilla cuando conoces de antemano cuántas veces repetir. while es para esperar a que cambie un estado.",
+    answerExplanation:
+      "for brilla cuando conoces de antemano cuántas veces repetir. while es para esperar a que cambie un estado.",
   },
   {
     kind: "tip",
@@ -3119,7 +3375,8 @@ const buclesSteps: LessonStep[] = [
       { id: "d", label: "Nunca se detiene." },
     ],
     correctId: "a",
-    explanation: "while sigue iterando mientras la condición sea true. En cuanto se vuelve false, el bucle termina.",
+    explanation:
+      "while sigue iterando mientras la condición sea true. En cuanto se vuelve false, el bucle termina.",
   },
   {
     kind: "quiz",
@@ -3170,7 +3427,8 @@ const buclesSteps: LessonStep[] = [
     kind: "completion",
     eyebrow: "¡Lección completada!",
     title: "Repeticiones bajo control",
-    message: "Ya puedes automatizar tareas. Lo siguiente: empaquetar lógica reutilizable en funciones.",
+    message:
+      "Ya puedes automatizar tareas. Lo siguiente: empaquetar lógica reutilizable en funciones.",
   },
 ];
 
@@ -3224,16 +3482,14 @@ const funcionesSteps: LessonStep[] = [
       label: "JavaScript",
       content: `function sumar(a, b) {\n  return a + b;\n}\n\nconst total = sumar(4, 7);\nconsole.log(total); // 11`,
     },
-    notes: [
-      "a y b son parámetros (la receta).",
-      "4 y 7 son argumentos (los ingredientes reales).",
-    ],
+    notes: ["a y b son parámetros (la receta).", "4 y 7 son argumentos (los ingredientes reales)."],
   },
   {
     kind: "practice",
     eyebrow: "Teoría + práctica · 4 de 12",
     title: "Parámetros vs argumentos",
-    explanation: "Los **parámetros** son los nombres en la declaración. Los **argumentos** son los valores que pasas al llamarla.",
+    explanation:
+      "Los **parámetros** son los nombres en la declaración. Los **argumentos** son los valores que pasas al llamarla.",
     code: {
       label: "JavaScript",
       content: `function saludar(nombre) {\n  return \`Hola, \${nombre}\`;\n}\n\nsaludar("Ana");`,
@@ -3246,13 +3502,15 @@ const funcionesSteps: LessonStep[] = [
       { id: "d", label: "El nombre de la función" },
     ],
     correctId: "b",
-    answerExplanation: "\"Ana\" es el valor real que se pasa al llamar la función, eso lo convierte en argumento. El parámetro es nombre.",
+    answerExplanation:
+      '"Ana" es el valor real que se pasa al llamar la función, eso lo convierte en argumento. El parámetro es nombre.',
   },
   {
     kind: "practice",
     eyebrow: "Teoría + práctica · 5 de 12",
     title: "El valor de return",
-    explanation: "**return** entrega el resultado al exterior. Si no hay return, la función devuelve undefined automáticamente.",
+    explanation:
+      "**return** entrega el resultado al exterior. Si no hay return, la función devuelve undefined automáticamente.",
     code: {
       label: "JavaScript",
       content: `function duplicar(n) {\n  return n * 2;\n}\n\nconst resultado = duplicar(5);`,
@@ -3265,7 +3523,8 @@ const funcionesSteps: LessonStep[] = [
       { id: "d", label: "Lanza un error" },
     ],
     correctId: "b",
-    answerExplanation: "duplicar(5) evalúa n * 2 con n = 5. El return entrega 10, que se asigna a resultado.",
+    answerExplanation:
+      "duplicar(5) evalúa n * 2 con n = 5. El return entrega 10, que se asigna a resultado.",
   },
   {
     kind: "tip",
@@ -3290,7 +3549,7 @@ const funcionesSteps: LessonStep[] = [
       { id: "d", label: "Lanza un error" },
     ],
     correctId: "b",
-    explanation: "El parámetro nombre recibe \"Luis\" y se interpola en el template literal.",
+    explanation: 'El parámetro nombre recibe "Luis" y se interpola en el template literal.',
   },
   {
     kind: "quiz",
@@ -3303,7 +3562,8 @@ const funcionesSteps: LessonStep[] = [
       { id: "d", label: "Devuelve 0." },
     ],
     correctId: "b",
-    explanation: "Sin return explícito, la función devuelve undefined. Si esperabas un valor, casi siempre es un bug.",
+    explanation:
+      "Sin return explícito, la función devuelve undefined. Si esperabas un valor, casi siempre es un bug.",
   },
   {
     kind: "quiz",
@@ -3320,7 +3580,8 @@ const funcionesSteps: LessonStep[] = [
       { id: "d", label: "9" },
     ],
     correctId: "b",
-    explanation: "3 * 4 = 12, más 2 da 14. La precedencia de operadores hace que * se evalúe antes que +.",
+    explanation:
+      "3 * 4 = 12, más 2 da 14. La precedencia de operadores hace que * se evalúe antes que +.",
   },
   {
     kind: "quiz",
@@ -3333,7 +3594,8 @@ const funcionesSteps: LessonStep[] = [
       { id: "d", label: "Solo si la declaras como reusable." },
     ],
     correctId: "b",
-    explanation: "Esa es la magia de las funciones: una vez declaradas, puedes llamarlas todas las veces que necesites.",
+    explanation:
+      "Esa es la magia de las funciones: una vez declaradas, puedes llamarlas todas las veces que necesites.",
   },
   {
     kind: "recap",
@@ -3372,7 +3634,8 @@ const arreglosObjetosSteps: LessonStep[] = [
     kind: "theory",
     eyebrow: "Teoría · 2 de 12",
     title: "Arreglo vs objeto",
-    description: "Las dos estructuras guardan colecciones, pero responden a preguntas distintas. Elegir la correcta simplifica todo tu código.",
+    description:
+      "Las dos estructuras guardan colecciones, pero responden a preguntas distintas. Elegir la correcta simplifica todo tu código.",
     table: {
       headers: ["Arreglo", "Objeto"],
       rows: [
@@ -3404,7 +3667,8 @@ const arreglosObjetosSteps: LessonStep[] = [
     kind: "codeExample",
     eyebrow: "Teoría + código · 3 de 12",
     title: "Trabajando con ambos",
-    description: "Accedes a un arreglo por índice y a un objeto por clave. Combinándolos representas la mayoría de los datos reales.",
+    description:
+      "Accedes a un arreglo por índice y a un objeto por clave. Combinándolos representas la mayoría de los datos reales.",
     code: {
       label: "JavaScript",
       content: `const tareas = [\n  { titulo: "Estudiar", hecha: true },\n  { titulo: "Leer", hecha: false },\n];\n\nconsole.log(tareas[0].titulo); // "Estudiar"\nconsole.log(tareas[1].hecha);  // false`,
@@ -3418,7 +3682,8 @@ const arreglosObjetosSteps: LessonStep[] = [
     kind: "practice",
     eyebrow: "Teoría + práctica · 4 de 12",
     title: "Acceso por índice",
-    explanation: "Los arreglos se indexan desde **0**. El primer elemento es arr[0], el segundo arr[1], y así sucesivamente.",
+    explanation:
+      "Los arreglos se indexan desde **0**. El primer elemento es arr[0], el segundo arr[1], y así sucesivamente.",
     code: {
       label: "JavaScript",
       content: `const colores = ["rojo", "verde", "azul"];`,
@@ -3431,13 +3696,15 @@ const arreglosObjetosSteps: LessonStep[] = [
       { id: "d", label: "undefined" },
     ],
     correctId: "c",
-    answerExplanation: 'colores[0] es "rojo", colores[1] es "verde" y colores[2] es "azul". Los índices empiezan en 0.',
+    answerExplanation:
+      'colores[0] es "rojo", colores[1] es "verde" y colores[2] es "azul". Los índices empiezan en 0.',
   },
   {
     kind: "practice",
     eyebrow: "Teoría + práctica · 5 de 12",
     title: "Acceso por propiedad",
-    explanation: "A un objeto se accede con **punto** (obj.prop) o con **corchetes** (obj[\"prop\"]). El punto es más común.",
+    explanation:
+      'A un objeto se accede con **punto** (obj.prop) o con **corchetes** (obj["prop"]). El punto es más común.',
     code: {
       label: "JavaScript",
       content: `const usuario = {\n  nombre: "Ana",\n  edad: 19,\n};`,
@@ -3450,7 +3717,8 @@ const arreglosObjetosSteps: LessonStep[] = [
       { id: "d", label: 'edad("usuario")' },
     ],
     correctId: "b",
-    answerExplanation: "Los objetos se acceden por nombre de propiedad usando el punto. usuario.edad devuelve 19.",
+    answerExplanation:
+      "Los objetos se acceden por nombre de propiedad usando el punto. usuario.edad devuelve 19.",
   },
   {
     kind: "tip",
@@ -3471,7 +3739,8 @@ const arreglosObjetosSteps: LessonStep[] = [
       { id: "d", label: "Cinco variables sueltas." },
     ],
     correctId: "c",
-    explanation: "Lista + atributos por elemento = arreglo de objetos. Es el patrón que se repite en todas las apps reales.",
+    explanation:
+      "Lista + atributos por elemento = arreglo de objetos. Es el patrón que se repite en todas las apps reales.",
   },
   {
     kind: "quiz",
@@ -3488,7 +3757,8 @@ const arreglosObjetosSteps: LessonStep[] = [
       { id: "d", label: "undefined" },
     ],
     correctId: "c",
-    explanation: "length devuelve la cantidad de elementos del arreglo. Hay 3 elementos, así que imprime 3.",
+    explanation:
+      "length devuelve la cantidad de elementos del arreglo. Hay 3 elementos, así que imprime 3.",
   },
   {
     kind: "quiz",
@@ -3505,7 +3775,7 @@ const arreglosObjetosSteps: LessonStep[] = [
       { id: "d", label: "undefined" },
     ],
     correctId: "b",
-    explanation: "tareas[1] es el segundo objeto. Su propiedad titulo es \"Correr\".",
+    explanation: 'tareas[1] es el segundo objeto. Su propiedad titulo es "Correr".',
   },
   {
     kind: "quiz",
@@ -3518,7 +3788,8 @@ const arreglosObjetosSteps: LessonStep[] = [
       { id: "d", label: "Un string con comas." },
     ],
     correctId: "b",
-    explanation: "Un objeto agrupa propiedades nombradas bajo una entidad. Es ideal para representar un usuario.",
+    explanation:
+      "Un objeto agrupa propiedades nombradas bajo una entidad. Es ideal para representar un usuario.",
   },
   {
     kind: "recap",
@@ -3535,7 +3806,8 @@ const arreglosObjetosSteps: LessonStep[] = [
     kind: "completion",
     eyebrow: "¡Ruta inicial completada!",
     title: "Hiciste todo el recorrido",
-    message: "Cubriste las cinco lecciones esenciales. Ya tienes la base para construir lógica de verdad.",
+    message:
+      "Cubriste las cinco lecciones esenciales. Ya tienes la base para construir lógica de verdad.",
   },
 ];
 
@@ -3612,6 +3884,21 @@ export const learningModules: LearningModule[] = [
     icon: "Variable",
     tone: "rose",
     steps: variablesConstantesSteps,
+    evaluationMode: "graded",
+    nextSlug: "uso-de-variables-y-constantes",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "uso-de-variables-y-constantes",
+    title: "Uso de variables y constantes",
+    subtitle: "Inicializa, actualiza y sigue los datos de un algoritmo",
+    description:
+      "Practica cómo inicializar, consultar y actualizar variables, reutilizar constantes y seguir el estado de un problema paso a paso.",
+    duration: "8 min",
+    level: "Inicial",
+    icon: "RefreshCw",
+    tone: "violet",
+    steps: usoVariablesConstantesSteps,
     evaluationMode: "graded",
     nextSlug: "tipos-de-datos",
   },
@@ -3790,10 +4077,7 @@ export const learningModules: LearningModule[] = [
   },
 ];
 
-const learningStatsConfig: Record<
-  CourseId,
-  Omit<LearningStats, "totalModules">
-> = {
+const learningStatsConfig: Record<CourseId, Omit<LearningStats, "totalModules">> = {
   "fundamentos-programacion": {
     currentStreak: "1 día",
     completedModules: 0,

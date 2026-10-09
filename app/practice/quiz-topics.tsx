@@ -12,17 +12,6 @@ export default function QuizTopicsScreen() {
         data={flashcardTopics}
         keyExtractor={(item) => item.slug}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={
-          <View className="pb-5">
-            <View className="rounded-[32px] border border-border bg-card px-5 py-6">
-              <Text className="text-h1 leading-10 text-foreground">Temas de Cuestionario</Text>
-              <Text className="mt-3 text-body leading-7 text-muted-foreground">
-                Elige un tema para resolver 5 preguntas con validación inmediata, avance guiado y
-                resultados al final de la sesión.
-              </Text>
-            </View>
-          </View>
-        }
         contentContainerClassName="gap-4 pb-8"
         renderItem={({ item }) => (
           <Pressable

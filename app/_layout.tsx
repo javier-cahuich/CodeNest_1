@@ -221,6 +221,13 @@ function RootContent() {
             }}
           />
           <Stack.Screen
+            name="practice/error-review"
+            options={{
+              title: "Repaso de errores",
+              headerRight: () => <ThemeToggle />,
+            }}
+          />
+          <Stack.Screen
             name="+not-found"
             options={{
               title: "Not Found",
