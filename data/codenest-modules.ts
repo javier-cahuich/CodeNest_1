@@ -3756,6 +3756,412 @@ const estructurasBuclesSteps: LessonStep[] = [
   },
 ];
 
+const buclesProfundidadSteps: LessonStep[] = [
+  {
+    kind: "theory",
+    eyebrow: "Profundización · 1 de 18",
+    title: "Controla cada repetición",
+    description:
+      "Ya conoces for, while y do...while. Ahora aprenderás a diseñar recorridos precisos, interpretar su ejecución y resolver tareas reales sin caer en repeticiones infinitas o límites incorrectos.",
+    bullets: [
+      {
+        bold: "Precisión:",
+        text: "decide exactamente qué valores debe visitar el bucle y cuándo debe terminar.",
+      },
+      {
+        bold: "Estado:",
+        text: "usa contadores y acumuladores para conservar resultados entre iteraciones.",
+      },
+      {
+        bold: "Control:",
+        text: "omite o detén iteraciones de forma intencional con continue y break.",
+      },
+    ],
+    callouts: [
+      {
+        icon: "Repeat2",
+        title: "Objetivo práctico",
+        description:
+          "Leer, depurar y construir bucles de JavaScript que procesen datos de manera clara y segura.",
+      },
+    ],
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Límites · 2 de 18",
+    title: "Evita el error de una repetición extra",
+    description:
+      "Los errores de límite aparecen cuando el bucle comienza o termina una posición antes o después de lo necesario. Escribe primero el conjunto esperado y luego elige < o <=.",
+    code: {
+      label: "JavaScript",
+      content: `for (let numero = 1; numero <= 5; numero += 1) {
+  console.log(numero);
+}
+
+// Resultado: 1, 2, 3, 4, 5`,
+    },
+    notes: [
+      "<= incluye el 5; usar < 5 terminaría en 4.",
+      "Prueba mentalmente el primer valor, el último válido y el primer valor que ya no debe entrar.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 3 de 18",
+    question: "¿Cuántas veces se muestra el mensaje?",
+    code: {
+      label: "JavaScript",
+      content: `for (let intento = 0; intento < 3; intento += 1) {
+  console.log("Intentando...");
+}`,
+    },
+    options: [
+      { id: "a", label: "2 veces" },
+      { id: "b", label: "3 veces" },
+      { id: "c", label: "4 veces" },
+      { id: "d", label: "Nunca termina" },
+    ],
+    correctId: "b",
+    explanation:
+      "intento toma los valores 0, 1 y 2. Cuando llega a 3, la condición intento < 3 es falsa.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Recorridos · 4 de 18",
+    title: "Visita cada elemento con for...of",
+    description:
+      "Cuando necesitas el valor de cada elemento y no su posición, for...of expresa el recorrido de forma directa. También funciona con textos, visitando un carácter a la vez.",
+    code: {
+      label: "JavaScript",
+      content: `const palabra = "CODE";
+
+for (const letra of palabra) {
+  console.log(letra);
+}
+
+// C, O, D, E`,
+    },
+    notes: [
+      "letra recibe el siguiente carácter en cada iteración.",
+      "Usa un for clásico cuando sí necesites controlar el índice o el tamaño del salto.",
+    ],
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Acumuladores · 5 de 18",
+    title: "Construye un resultado durante el recorrido",
+    description:
+      "Un acumulador se declara antes del bucle y se actualiza en cada vuelta. Puede guardar una suma, un conteo o un texto construido paso a paso.",
+    code: {
+      label: "JavaScript",
+      content: `let suma = 0;
+
+for (let numero = 1; numero <= 4; numero += 1) {
+  suma += numero;
+}
+
+console.log(suma); // 10`,
+    },
+    notes: [
+      "suma conserva lo obtenido en las iteraciones anteriores.",
+      "El valor inicial debe ser neutro: 0 para sumar y 1 para multiplicar.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 6 de 18",
+    question: "¿Qué valor final tiene total?",
+    code: {
+      label: "JavaScript",
+      content: `let total = 1;
+
+for (let numero = 1; numero <= 3; numero += 1) {
+  total *= numero;
+}`,
+    },
+    options: [
+      { id: "a", label: "3" },
+      { id: "b", label: "6" },
+      { id: "c", label: "7" },
+      { id: "d", label: "9" },
+    ],
+    correctId: "b",
+    explanation: "total comienza en 1 y después vale 1 × 1 × 2 × 3, cuyo resultado es 6.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Continue · 7 de 18",
+    title: "Omite solo la iteración actual",
+    description:
+      "continue salta el resto del bloque y comienza la siguiente iteración. Es útil cuando ciertos valores no deben procesarse, sin detener todo el recorrido.",
+    code: {
+      label: "JavaScript",
+      content: `for (let numero = 1; numero <= 5; numero += 1) {
+  if (numero === 3) {
+    continue;
+  }
+
+  console.log(numero);
+}
+
+// 1, 2, 4, 5`,
+    },
+    notes: [
+      "El 3 se omite, pero el bucle continúa con 4 y 5.",
+      "Una condición clara alrededor del trabajo principal puede ser más legible que varios continue.",
+    ],
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Break · 8 de 18",
+    title: "Detén la búsqueda cuando ya terminaste",
+    description:
+      "break finaliza el bucle completo. Conviene usarlo cuando ya encontraste el dato buscado y las iteraciones restantes no pueden cambiar el resultado.",
+    code: {
+      label: "JavaScript",
+      content: `let encontrado = false;
+
+for (let numero = 1; numero <= 10; numero += 1) {
+  if (numero === 4) {
+    encontrado = true;
+    break;
+  }
+}
+
+console.log(encontrado); // true`,
+    },
+    notes: [
+      "El bucle termina al encontrar el 4; nunca visita del 5 al 10.",
+      "break controla el bucle más cercano que lo contiene.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 9 de 18",
+    question: "¿Qué imprime este código?",
+    code: {
+      label: "JavaScript",
+      content: `for (let n = 1; n <= 6; n += 1) {
+  if (n === 2) continue;
+  if (n === 5) break;
+  console.log(n);
+}`,
+    },
+    options: [
+      { id: "a", label: "1, 2, 3, 4, 5, 6" },
+      { id: "b", label: "1, 3, 4" },
+      { id: "c", label: "1, 3, 4, 6" },
+      { id: "d", label: "2, 5" },
+    ],
+    correctId: "b",
+    explanation:
+      "continue omite el 2. Luego se imprimen 3 y 4; break termina el bucle antes de imprimir el 5.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Anidación · 10 de 18",
+    title: "Combina recorridos por niveles",
+    description:
+      "Un bucle anidado ejecuta un recorrido completo dentro de cada vuelta del recorrido exterior. Sirve para trabajar con filas y columnas, horarios o combinaciones.",
+    code: {
+      label: "JavaScript",
+      content: `for (let fila = 1; fila <= 2; fila += 1) {
+  for (let columna = 1; columna <= 3; columna += 1) {
+    console.log(\`Fila \${fila}, columna \${columna}\`);
+  }
+}`,
+    },
+    notes: [
+      "Por cada una de las 2 filas se recorren las 3 columnas.",
+      "El trabajo total es 2 × 3 = 6 iteraciones internas.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 11 de 18",
+    question: "¿Cuántas veces se ejecuta console.log?",
+    code: {
+      label: "JavaScript",
+      content: `for (let turno = 0; turno < 3; turno += 1) {
+  for (let tarea = 0; tarea < 2; tarea += 1) {
+    console.log(turno, tarea);
+  }
+}`,
+    },
+    options: [
+      { id: "a", label: "2 veces" },
+      { id: "b", label: "3 veces" },
+      { id: "c", label: "5 veces" },
+      { id: "d", label: "6 veces" },
+    ],
+    correctId: "d",
+    explanation:
+      "El bucle exterior tiene 3 vueltas y en cada una el interior realiza 2: 3 × 2 = 6.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Diseño · 12 de 18",
+    title: "Haz visible el avance y el costo",
+    description:
+      "Un bucle confiable deja claro qué cambia y cuánto trabajo realiza. Antes de ejecutarlo, revisa su estado, su salida y la cantidad aproximada de iteraciones.",
+    table: {
+      headers: ["Pregunta", "Señal de un diseño claro"],
+      rows: [
+        ["¿Qué cambia?", "La variable actualizada se reconoce fácilmente."],
+        ["¿Cuándo termina?", "La condición puede volverse falsa."],
+        ["¿Cuánto recorre?", "Los límites representan solo los datos necesarios."],
+        ["¿Hay anidación?", "Cada nivel tiene una responsabilidad distinta."],
+      ],
+    },
+    callouts: [
+      {
+        icon: "TriangleAlert",
+        title: "Señal de alerta",
+        description:
+          "Si la condición depende de una variable que nunca cambia, el bucle puede ser infinito.",
+      },
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Práctica guiada · 13 de 18",
+    title: "Elige la herramienta de control",
+    instructions:
+      "Selecciona la opción que expresa mejor cada necesidad. Después comprueba tus respuestas.",
+    questions: [
+      {
+        id: "skip-invalid",
+        question: "Ignorar un dato inválido y continuar con el siguiente.",
+        options: [
+          { id: "continue", label: "continue" },
+          { id: "break", label: "break" },
+          { id: "nested", label: "Un bucle anidado" },
+        ],
+        correctId: "continue",
+        explanation: "continue omite la iteración actual sin cancelar las demás.",
+      },
+      {
+        id: "stop-search",
+        question: "Terminar una búsqueda en cuanto aparece el resultado.",
+        options: [
+          { id: "continue", label: "continue" },
+          { id: "break", label: "break" },
+          { id: "accumulator", label: "Un acumulador" },
+        ],
+        correctId: "break",
+        explanation: "break evita recorridos innecesarios cuando el objetivo ya se cumplió.",
+      },
+      {
+        id: "sum-sales",
+        question: "Conservar la suma de varias ventas durante el recorrido.",
+        options: [
+          { id: "accumulator", label: "Un acumulador" },
+          { id: "break", label: "break" },
+          { id: "nested", label: "Dos bucles anidados" },
+        ],
+        correctId: "accumulator",
+        explanation: "El acumulador guarda y actualiza el resultado parcial.",
+      },
+      {
+        id: "seats",
+        question: "Visitar cada asiento organizado por fila y columna.",
+        options: [
+          { id: "nested", label: "Bucles anidados" },
+          { id: "continue", label: "continue" },
+          { id: "single", label: "Un único if" },
+        ],
+        correctId: "nested",
+        explanation: "Un nivel recorre las filas y el otro las columnas.",
+      },
+    ],
+    explanation:
+      "Elige cada recurso por su intención: omitir, detener, conservar estado o recorrer niveles.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 14 de 18",
+    title: "Construye un contador de pares",
+    instructions:
+      "Ordena los bloques para recorrer del 1 al 6, omitir números impares y contar únicamente los pares.",
+    blocks: [
+      { id: "state", text: "let cantidadPares = 0;" },
+      { id: "loop", text: "for (let numero = 1; numero <= 6; numero += 1) {" },
+      { id: "skip", text: "if (numero % 2 !== 0) continue;" },
+      { id: "count", text: "cantidadPares += 1;" },
+      { id: "close", text: "}" },
+      { id: "show", text: "console.log(cantidadPares); // 3" },
+    ],
+    correctOrder: ["state", "loop", "skip", "count", "close", "show"],
+    explanation:
+      "El contador existe antes del bucle; cada impar se omite y solo los valores 2, 4 y 6 incrementan el resultado.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Aplicación · 15 de 18",
+    title: "Procesa datos y conserva un resumen",
+    description:
+      "En aplicaciones reales, un bucle suele validar cada dato y actualizar un resultado. Este ejemplo anticipa el uso de colecciones que estudiarás en la siguiente sección.",
+    code: {
+      label: "JavaScript",
+      content: `const calificaciones = [80, -1, 95, 70];
+let suma = 0;
+let validas = 0;
+
+for (const calificacion of calificaciones) {
+  if (calificacion < 0) continue;
+
+  suma += calificacion;
+  validas += 1;
+}
+
+const promedio = suma / validas;
+console.log(promedio); // 81.666...`,
+    },
+    notes: [
+      "La calificación -1 se considera inválida y no participa en el cálculo.",
+      "suma y validas son acumuladores con responsabilidades diferentes.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Aplicación · 16 de 18",
+    question: "¿Qué cambio evita una división entre cero si no hay calificaciones válidas?",
+    code: {
+      label: "JavaScript",
+      content: `const promedio = suma / validas;
+console.log(promedio);`,
+    },
+    options: [
+      { id: "a", label: "Comprobar validas > 0 antes de dividir" },
+      { id: "b", label: "Cambiar for...of por while" },
+      { id: "c", label: "Agregar break en cada iteración" },
+      { id: "d", label: "Inicializar suma con 1" },
+    ],
+    correctId: "a",
+    explanation:
+      "Si validas vale 0, no existe un divisor útil. La comprobación protege el cálculo y permite mostrar un estado vacío.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 17 de 18",
+    title: "Bucles precisos y útiles",
+    takeaways: [
+      "Comprueba el primer valor, el último incluido y el primer valor excluido para evitar errores de límite.",
+      "Usa for...of cuando necesitas visitar valores sin administrar un índice.",
+      "Los acumuladores conservan sumas, conteos y otros resultados entre iteraciones.",
+      "continue omite una vuelta; break detiene por completo el bucle más cercano.",
+      "En bucles anidados, multiplica las vueltas de cada nivel para estimar el trabajo total.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 18 de 18",
+    title: "Resultados de bucles a profundidad",
+    message:
+      "Revisa tu puntuación y cada explicación para confirmar que puedes interpretar, depurar y construir recorridos precisos en JavaScript.",
+  },
+];
+
 const arreglosSteps: LessonStep[] = [
   {
     kind: "theory",
@@ -5577,6 +5983,21 @@ export const learningModules: LearningModule[] = [
     icon: "Repeat2",
     tone: "violet",
     steps: estructurasBuclesSteps,
+    evaluationMode: "graded",
+    nextSlug: "bucles-a-profundidad",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "bucles-a-profundidad",
+    title: "Bucles a profundidad",
+    subtitle: "Controla recorridos, límites y resultados paso a paso",
+    description:
+      "Profundiza en límites, for...of, acumuladores, break, continue y bucles anidados mediante ejercicios prácticos en JavaScript.",
+    duration: "13 min",
+    level: "Intermedio",
+    icon: "Repeat2",
+    tone: "emerald",
+    steps: buclesProfundidadSteps,
     evaluationMode: "graded",
     nextSlug: "estructuras-datos-arreglos",
   },
