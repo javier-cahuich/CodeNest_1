@@ -50,8 +50,9 @@ export default function PracticeTabScreen() {
       <View className="gap-4">
         {practiceModes.map((mode) => {
           const opensFlashcards = mode.id === "flash";
+          const opensErrorReview = mode.id === "logic";
           const opensQuizzes = mode.id === "review";
-          const opensPracticeFlow = opensFlashcards || opensQuizzes;
+          const opensPracticeFlow = opensFlashcards || opensErrorReview || opensQuizzes;
 
           return (
             <Pressable
@@ -61,6 +62,11 @@ export default function PracticeTabScreen() {
               onPress={() => {
                 if (opensFlashcards) {
                   router.push("/practice/topics");
+                  return;
+                }
+
+                if (opensErrorReview) {
+                  router.push("/practice/error-review");
                   return;
                 }
 
