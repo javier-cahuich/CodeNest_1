@@ -60,6 +60,7 @@ const fundamentalsProgrammingSections: ModuleSectionDefinition[] = [
     moduleSlugs: [
       "estructuras-datos-arreglos",
       "arreglos-unidimensionales-vectores",
+      "uso-de-vectores",
       "arreglos-bidimensionales-matrices",
     ],
   },

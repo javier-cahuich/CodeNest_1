@@ -4185,6 +4185,326 @@ const vectoresSteps: LessonStep[] = [
   },
 ];
 
+const usoVectoresSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 17",
+    title: "De recorrer a resolver",
+    paragraphs: [
+      "Ya sabes declarar un vector, acceder a sus posiciones y recorrerlo con un ciclo. Ahora usarás esas bases para **resolver problemas reales con arreglos en JavaScript**.",
+      "En esta lección aprenderás a agregar datos, calcular resultados, buscar elementos y crear nuevos arreglos mediante transformaciones y filtros.",
+    ],
+    code: {
+      label: "JavaScript",
+      content: `const temperaturas = [22, 24, 21, 25];\n\nconsole.log(temperaturas[0]); // 22\nconsole.log(temperaturas.length); // 4`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Longitud · 2 de 17",
+    title: "El arreglo conoce su tamaño",
+    description:
+      "La propiedad length indica cuántos elementos contiene el arreglo. Como los índices comienzan en 0, el último elemento está en length - 1.",
+    table: {
+      headers: ["Expresión", "Resultado", "Qué representa"],
+      rows: [
+        ["temperaturas.length", "4", "Cantidad de elementos"],
+        ["temperaturas[0]", "22", "Primer elemento"],
+        ["temperaturas.length - 1", "3", "Índice de la última posición"],
+        ["temperaturas[temperaturas.length - 1]", "25", "Último elemento"],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Crecimiento · 3 de 17",
+    title: "Agrega elementos con push",
+    description:
+      "En JavaScript un arreglo puede crecer durante la ejecución. push agrega un elemento al final y actualiza length automáticamente.",
+    code: {
+      label: "JavaScript",
+      content: `const tareas = ["Leer", "Practicar"];\n\ntareas.push("Repasar");\n\nconsole.log(tareas);\n// ["Leer", "Practicar", "Repasar"]\nconsole.log(tareas.length); // 3`,
+    },
+    notes: [
+      "const impide reemplazar el arreglo completo, pero permite modificar sus elementos.",
+      "push devuelve la nueva longitud del arreglo.",
+      "Mantener elementos del mismo tipo hace que el arreglo sea más predecible.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 4 de 17",
+    question: "¿Qué muestra el último console.log?",
+    code: {
+      label: "JavaScript",
+      content: `const niveles = [1, 2];\nniveles.push(3);\nniveles.push(4);\n\nconsole.log(niveles[niveles.length - 1]);`,
+    },
+    options: [
+      { id: "a", label: "2" },
+      { id: "b", label: "3" },
+      { id: "c", label: "4" },
+      { id: "d", label: "5" },
+    ],
+    correctId: "c",
+    explanation:
+      "Después de los dos push, niveles contiene [1, 2, 3, 4]. Su longitud es 4 y el índice 4 - 1 apunta al valor 4.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Acumulación · 5 de 17",
+    title: "Suma y calcula un promedio",
+    description:
+      "Recorrer un arreglo permite combinar todos sus valores. Un acumulador inicia en 0 y guarda el total actualizado en cada vuelta.",
+    code: {
+      label: "JavaScript",
+      content: `const calificaciones = [80, 90, 70, 100];\nlet suma = 0;\n\nfor (const calificacion of calificaciones) {\n  suma += calificacion;\n}\n\nconst promedio = suma / calificaciones.length;\nconsole.log(promedio); // 85`,
+    },
+    notes: [
+      "for...of entrega directamente cada valor del arreglo.",
+      "suma conserva el total parcial después de cada vuelta.",
+      "El promedio divide el total entre la cantidad de elementos.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 6 de 17",
+    question: "¿Qué valor muestra total?",
+    code: {
+      label: "JavaScript",
+      content: `const ventas = [5, 8, 2];\nlet total = 10;\n\nfor (const venta of ventas) {\n  total += venta;\n}\n\nconsole.log(total);`,
+    },
+    options: [
+      { id: "a", label: "15" },
+      { id: "b", label: "25" },
+      { id: "c", label: "30" },
+      { id: "d", label: "10" },
+    ],
+    correctId: "b",
+    explanation: "El acumulador inicia en 10 y después suma 5, 8 y 2: 10 + 5 + 8 + 2 = 25.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Búsqueda · 7 de 17",
+    title: "Encuentra datos sin recorrer a mano",
+    description: "JavaScript incluye métodos para responder preguntas frecuentes sobre un arreglo.",
+    table: {
+      headers: ["Método", "Respuesta", "Ejemplo"],
+      rows: [
+        ["includes(valor)", "true o false", 'colores.includes("azul")'],
+        ["indexOf(valor)", "Índice o -1", 'colores.indexOf("verde")'],
+        ["find(condición)", "Primer elemento o undefined", "edades.find((edad) => edad >= 18)"],
+      ],
+    },
+    callouts: [
+      {
+        icon: "Search",
+        title: "Elige según la pregunta",
+        description:
+          "Usa includes para saber si existe, indexOf para conocer la posición y find para localizar un elemento que cumpla una condición.",
+      },
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Práctica de búsqueda · 8 de 17",
+    title: "Interpreta cada consulta",
+    instructions: "Elige el resultado correcto para cada expresión.",
+    questions: [
+      {
+        id: "includes-topic",
+        question: '["HTML", "CSS", "JS"].includes("JS")',
+        options: [
+          { id: "a", label: "true" },
+          { id: "b", label: "false" },
+          { id: "c", label: "2" },
+        ],
+        correctId: "a",
+        explanation: "JS sí aparece dentro del arreglo, por eso includes devuelve true.",
+      },
+      {
+        id: "index-topic",
+        question: '["HTML", "CSS", "JS"].indexOf("CSS")',
+        options: [
+          { id: "a", label: "0" },
+          { id: "b", label: "1" },
+          { id: "c", label: "2" },
+        ],
+        correctId: "b",
+        explanation: "CSS ocupa la segunda posición y su índice base 0 es 1.",
+      },
+      {
+        id: "missing-topic",
+        question: '["HTML", "CSS", "JS"].indexOf("Python")',
+        options: [
+          { id: "a", label: "false" },
+          { id: "b", label: "0" },
+          { id: "c", label: "-1" },
+        ],
+        correctId: "c",
+        explanation: "indexOf devuelve -1 cuando no encuentra el valor solicitado.",
+      },
+    ],
+    explanation:
+      "includes responde si el valor existe; indexOf indica dónde está y usa -1 para representar que no existe.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Transformación · 9 de 17",
+    title: "Crea un arreglo nuevo con map",
+    description:
+      "map aplica una transformación a cada elemento y devuelve otro arreglo con la misma cantidad de posiciones.",
+    code: {
+      label: "JavaScript",
+      content: `const precios = [100, 250, 80];\n\nconst preciosConIva = precios.map((precio) => {\n  return precio * 1.16;\n});\n\nconsole.log(preciosConIva);\n// [116, 290, 92.8]`,
+    },
+    notes: [
+      "La función recibe un elemento y devuelve su versión transformada.",
+      "precios conserva sus valores originales.",
+      "preciosConIva tiene la misma longitud que precios.",
+    ],
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Selección · 10 de 17",
+    title: "Conserva solo lo necesario con filter",
+    description:
+      "filter evalúa cada elemento y crea un arreglo nuevo únicamente con los valores que cumplen la condición.",
+    code: {
+      label: "JavaScript",
+      content: `const temperaturas = [18, 25, 31, 22, 35];\n\nconst diasCalurosos = temperaturas.filter((temperatura) => {\n  return temperatura >= 30;\n});\n\nconsole.log(diasCalurosos); // [31, 35]`,
+    },
+    notes: [
+      "La condición devuelve true para los elementos que deben conservarse.",
+      "El resultado puede contener menos elementos o incluso quedar vacío.",
+      "filter no cambia el arreglo temperaturas.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 11 de 17",
+    question: "¿Qué contiene resultado?",
+    code: {
+      label: "JavaScript",
+      content: `const numeros = [1, 2, 3, 4, 5];\nconst resultado = numeros\n  .filter((numero) => numero % 2 === 0)\n  .map((numero) => numero * 10);`,
+    },
+    options: [
+      { id: "a", label: "[10, 20, 30, 40, 50]" },
+      { id: "b", label: "[2, 4]" },
+      { id: "c", label: "[20, 40]" },
+      { id: "d", label: "[10, 30, 50]" },
+    ],
+    correctId: "c",
+    explanation:
+      "filter conserva los pares 2 y 4. Después map multiplica cada uno por 10 y produce [20, 40].",
+  },
+  {
+    kind: "tip",
+    eyebrow: "Buenas prácticas · 12 de 17",
+    title: "Distingue modificar de crear",
+    body: "push y una asignación como arreglo[0] = valor modifican el arreglo existente. map y filter crean arreglos nuevos. Antes de elegir, decide si otras partes del programa todavía necesitan los datos originales.",
+    icon: "GitCompareArrows",
+    variant: "tip",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Caso práctico · 13 de 17",
+    title: "Prepara un reporte de inventario",
+    description:
+      "Un flujo práctico puede seleccionar datos, transformarlos y después recorrer el resultado para calcular una cifra final.",
+    code: {
+      label: "JavaScript",
+      content: `const existencias = [12, 0, 5, 20];\n\nconst disponibles = existencias.filter((cantidad) => {\n  return cantidad > 0;\n});\n\nconst cajas = disponibles.map((cantidad) => {\n  return cantidad * 2;\n});\n\nlet totalUnidades = 0;\nfor (const cantidad of cajas) {\n  totalUnidades += cantidad;\n}\n\nconsole.log(cajas); // [24, 10, 40]\nconsole.log(totalUnidades); // 74`,
+    },
+    notes: [
+      "filter elimina los productos sin existencia.",
+      "map convierte cada cantidad a dos cajas equivalentes.",
+      "El ciclo acumula las unidades del arreglo final.",
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Diagnóstico · 14 de 17",
+    title: "Elige la herramienta correcta",
+    instructions: "Resuelve cada situación sin modificar más datos de los necesarios.",
+    questions: [
+      {
+        id: "last-item",
+        question: "¿Cómo obtienes el último elemento de un arreglo llamado pedidos?",
+        options: [
+          { id: "a", label: "pedidos[pedidos.length]" },
+          { id: "b", label: "pedidos[pedidos.length - 1]" },
+          { id: "c", label: "pedidos[1]" },
+        ],
+        correctId: "b",
+        explanation: "El último índice siempre es una unidad menor que la longitud.",
+      },
+      {
+        id: "approved-only",
+        question: "¿Qué método crea un arreglo solo con calificaciones mayores o iguales a 70?",
+        options: [
+          { id: "a", label: "filter" },
+          { id: "b", label: "push" },
+          { id: "c", label: "includes" },
+        ],
+        correctId: "a",
+        explanation: "filter conserva únicamente los elementos que cumplen una condición.",
+      },
+      {
+        id: "double-values",
+        question: "¿Qué método crea un arreglo con cada valor multiplicado por 2?",
+        options: [
+          { id: "a", label: "indexOf" },
+          { id: "b", label: "map" },
+          { id: "c", label: "length" },
+        ],
+        correctId: "b",
+        explanation: "map transforma cada elemento y conserva la cantidad de posiciones.",
+      },
+    ],
+    explanation:
+      "length ayuda a calcular límites; filter selecciona elementos y map transforma todos los valores.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 15 de 17",
+    title: "Construye un reporte de calificaciones",
+    instructions:
+      "Ordena las instrucciones para guardar las notas, conservar las aprobatorias, convertirlas en mensajes y mostrar el resultado.",
+    blocks: [
+      { id: "data", text: "const notas = [55, 80, 92, 68];" },
+      { id: "filter", text: "const aprobadas = notas.filter((nota) => nota >= 70);" },
+      {
+        id: "map",
+        text: "const mensajes = aprobadas.map((nota) => `Aprobada: ${nota}`);",
+      },
+      { id: "output", text: "console.log(mensajes);" },
+    ],
+    correctOrder: ["data", "filter", "map", "output"],
+    explanation:
+      "Primero deben existir los datos; luego se seleccionan las notas aprobatorias, se transforman en mensajes y finalmente se muestra el resultado.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 16 de 17",
+    title: "Vectores aplicados en JavaScript",
+    takeaways: [
+      "length indica la cantidad de elementos y ayuda a localizar la última posición.",
+      "push agrega elementos al final y modifica el arreglo existente.",
+      "Un acumulador combina valores para obtener totales y promedios.",
+      "includes, indexOf y find resuelven distintos tipos de búsqueda.",
+      "map transforma cada elemento y filter conserva solo los que cumplen una condición.",
+      "Un problema real suele encadenar selección, transformación y cálculo.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 17 de 17",
+    title: "Resultados de uso de vectores",
+    message:
+      "Revisa tus respuestas para confirmar que puedes agregar, buscar, filtrar, transformar y resumir datos de un arreglo en JavaScript.",
+  },
+];
+
 const matricesSteps: LessonStep[] = [
   {
     kind: "theory",
@@ -5607,6 +5927,21 @@ export const learningModules: LearningModule[] = [
     icon: "ListOrdered",
     tone: "rose",
     steps: vectoresSteps,
+    evaluationMode: "graded",
+    nextSlug: "uso-de-vectores",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "uso-de-vectores",
+    title: "Uso de vectores",
+    subtitle: "Busca, transforma y resume listas en JavaScript",
+    description:
+      "Aplica arreglos de JavaScript para agregar datos, calcular resultados, buscar elementos y crear listas transformadas o filtradas.",
+    duration: "11 min",
+    level: "Intermedio",
+    icon: "ListChecks",
+    tone: "emerald",
+    steps: usoVectoresSteps,
     evaluationMode: "graded",
     nextSlug: "arreglos-bidimensionales-matrices",
   },
