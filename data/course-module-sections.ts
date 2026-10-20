@@ -52,6 +52,7 @@ const fundamentalsProgrammingSections: ModuleSectionDefinition[] = [
       "estructuras-control-condicionales",
       "condicionales-a-profundidad",
       "estructuras-control-bucles",
+      "bucles-a-profundidad",
     ],
   },
   {
