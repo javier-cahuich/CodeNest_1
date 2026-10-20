@@ -1,6 +1,6 @@
 import { router, useFocusEffect } from "expo-router";
 import { useCallback } from "react";
-import { FlatList, View } from "react-native";
+import { SectionList, View } from "react-native";
 import { CurrentCourseCard } from "@/components/codenest/current-course-card";
 import { CourseCertificateStatus } from "@/components/codenest/course-certificate-status";
 import { HomeStats } from "@/components/codenest/home-stats";
@@ -9,6 +9,7 @@ import { Screen } from "@/components/layout/screen";
 import { Text } from "@/components/ui/text";
 import LucideIcon from "@/lib/icons/LucideIcon";
 import { getLearningStatsByCourseId, getModulesByCourseId } from "@/data/codenest-modules";
+import { getCourseModuleSections } from "@/data/course-module-sections";
 import { getCourseById } from "@/data/courses";
 import { useCourseStore } from "@/stores/course-store";
 import { useLessonProgressStore } from "@/stores/lesson-progress-store";
@@ -30,6 +31,7 @@ export default function HomeTabScreen() {
   );
 
   const modules = selectedCourse?.hasContent ? getModulesByCourseId(selectedCourseId) : [];
+  const moduleSections = getCourseModuleSections(selectedCourseId, modules);
   const completedModules = selectedCourse?.hasContent
     ? modules.filter((module) => completedLessons[module.slug]).length
     : 0;
@@ -49,10 +51,7 @@ export default function HomeTabScreen() {
 
   const header = (
     <View className="gap-5 pb-6 pt-2">
-      <HomeStats
-        points={totalExperience}
-        streak={streak}
-      />
+      <HomeStats points={totalExperience} streak={streak} />
 
       {selectedCourse ? (
         <CurrentCourseCard course={selectedCourse} progress={progress} onPress={goToCourses} />
@@ -85,25 +84,35 @@ export default function HomeTabScreen() {
 
   return (
     <Screen className="bg-background">
-      <FlatList
-        data={modules}
+      <SectionList
+        sections={moduleSections}
         keyExtractor={(item) => item.slug}
         showsVerticalScrollIndicator={false}
+        stickySectionHeadersEnabled={false}
         ListHeaderComponent={header}
         ListFooterComponent={<CourseCertificateStatus isAvailable={certificateAvailable} />}
-        contentContainerClassName="gap-4 pb-8"
+        contentContainerClassName="pb-8"
+        renderSectionHeader={({ section }) => (
+          <View className="bg-background pb-3 pt-5">
+            <Text accessibilityRole="header" className="text-h3 text-foreground">
+              {section.title}
+            </Text>
+          </View>
+        )}
         renderItem={({ item }) => (
-          <ModuleCard
-            module={item}
-            isCompleted={Boolean(completedLessons[item.slug])}
-            bestScore={lessonScores[item.slug]}
-            onPress={() =>
-              router.push({
-                pathname: "/module/[slug]",
-                params: { slug: item.slug },
-              })
-            }
-          />
+          <View className="pb-4">
+            <ModuleCard
+              module={item}
+              isCompleted={Boolean(completedLessons[item.slug])}
+              bestScore={lessonScores[item.slug]}
+              onPress={() =>
+                router.push({
+                  pathname: "/module/[slug]",
+                  params: { slug: item.slug },
+                })
+              }
+            />
+          </View>
         )}
       />
     </Screen>

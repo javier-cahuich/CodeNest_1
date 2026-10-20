@@ -1525,6 +1525,243 @@ const tiposDatosSteps: LessonStep[] = [
   },
 ];
 
+const usoBooleanosSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 14",
+    title: "De un valor a un estado",
+    paragraphs: [
+      "Ya sabes que un booleano puede guardar **Verdadero** o **Falso**. Su valor práctico aparece cuando esos dos valores representan el estado actual de algo dentro del programa.",
+      "Una bandera booleana responde una pregunta concreta: ¿la sesión está activa?, ¿el correo está verificado?, ¿el recurso está disponible?",
+    ],
+    code: {
+      label: "Estados booleanos",
+      content: `sesionActiva <- Falso\ncorreoVerificado <- Verdadero\nrecursoDisponible <- Verdadero`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Modelado · 2 de 14",
+    title: "Cuándo conviene usar un booleano",
+    description:
+      "Antes de crear la variable, comprueba que el dato realmente pueda expresarse con solo dos estados opuestos.",
+    table: {
+      headers: ["Pregunta", "Sí conviene", "No conviene"],
+      rows: [
+        [
+          "¿Solo existen dos estados válidos?",
+          "Activo / inactivo",
+          "Pendiente / enviado / cancelado",
+        ],
+        ["¿El nombre se responde con sí o no?", "tienePermiso", "tipoDePermiso"],
+        ["¿Los estados son excluyentes?", "correoVerificado", "metodosDePago"],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Inicio seguro · 3 de 14",
+    title: "Declara e inicializa la bandera",
+    description:
+      "Una bandera debe comenzar con un estado conocido. El valor inicial debe representar la situación real antes de que ocurra cualquier acción.",
+    code: {
+      label: "Pseudocódigo",
+      content: `Definir sesionActiva Como Logico\nDefinir correoVerificado Como Logico\n\nsesionActiva <- Falso\ncorreoVerificado <- Falso`,
+    },
+    notes: [
+      "Una sesión nueva todavía no está activa.",
+      "Un correo nuevo aún no ha sido verificado.",
+      "Inicializar evita trabajar con un estado desconocido.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 1 · 4 de 14",
+    question: "¿Cuál es el valor inicial más seguro para una sesión que todavía no ha comenzado?",
+    options: [
+      { id: "a", label: "sesionActiva <- Verdadero" },
+      { id: "b", label: "sesionActiva <- Falso" },
+      { id: "c", label: 'sesionActiva <- "Falso"' },
+      { id: "d", label: "sesionActiva <- 1" },
+    ],
+    correctId: "b",
+    explanation:
+      "Falso representa que la sesión aún no está activa y mantiene el dato como un booleano real.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Tipos · 5 de 14",
+    title: "No imites un booleano",
+    description:
+      "Un texto o un número pueden parecer equivalentes, pero no tienen el mismo tipo ni comunican la intención con la misma claridad.",
+    table: {
+      headers: ["Valor", "Tipo real", "Uso recomendado"],
+      rows: [
+        ["Verdadero", "Booleano", "Sí: representa un estado lógico."],
+        ['"Verdadero"', "Cadena de texto", "No: es una palabra entre comillas."],
+        ["1", "Entero", "No: es un número, no una respuesta lógica explícita."],
+        ["0", "Entero", "No: obliga a recordar una equivalencia."],
+      ],
+    },
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 2 · 6 de 14",
+    question: "¿Qué guarda realmente esta variable?",
+    code: {
+      label: "Pseudocódigo",
+      content: `cuentaBloqueada <- "Falso"`,
+    },
+    options: [
+      { id: "a", label: "Un booleano con valor Falso." },
+      { id: "b", label: "Una cadena de texto con la palabra Falso." },
+      { id: "c", label: "Un número equivalente a cero." },
+      { id: "d", label: "Una variable sin valor." },
+    ],
+    correctId: "b",
+    explanation:
+      "Las comillas convierten Falso en texto. Un booleano se escribe sin comillas: cuentaBloqueada <- Falso.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Actualización · 7 de 14",
+    title: "El estado cambia cuando ocurre un evento",
+    description:
+      "La bandera conserva el estado más reciente. Un préstamo cambia la disponibilidad de un libro y una devolución la restaura.",
+    code: {
+      label: "Seguimiento de disponibilidad",
+      content: `libroDisponible <- Verdadero  // Está en la biblioteca\n\nlibroDisponible <- Falso      // Una persona lo solicita\nlibroDisponible <- Verdadero  // La persona lo devuelve\n\nEscribir libroDisponible`,
+    },
+    notes: [
+      "Cada asignación reemplaza el estado anterior.",
+      "El nombre permite interpretar Verdadero o Falso sin información adicional.",
+      "Al terminar, el libro vuelve a estar disponible.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 3 · 8 de 14",
+    question: "¿Qué valor se muestra después de esta secuencia?",
+    code: {
+      label: "Pseudocódigo",
+      content: `alarmaActiva <- Falso\nalarmaActiva <- Verdadero\nalarmaActiva <- Falso\nEscribir alarmaActiva`,
+    },
+    options: [
+      { id: "a", label: "Verdadero" },
+      { id: "b", label: "Falso" },
+      { id: "c", label: '"Falso"' },
+      { id: "d", label: "No se puede saber" },
+    ],
+    correctId: "b",
+    explanation:
+      "La última asignación apaga la alarma. Una variable conserva únicamente su valor actual, que en este caso es Falso.",
+  },
+  {
+    kind: "tip",
+    eyebrow: "Buena práctica · 9 de 14",
+    title: "Mantén una sola fuente de verdad",
+    body: "Evita guardar el mismo estado en dos banderas opuestas, como libroDisponible y libroPrestado. Podrían quedar ambas en Verdadero por error. Una sola bandera bien nombrada es más fácil de actualizar y entender.",
+    icon: "Lightbulb",
+    variant: "tip",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Decisión · 10 de 14",
+    title: "Usa la bandera directamente",
+    description:
+      "Cuando una decisión depende de una bandera, su valor ya es la condición. No hace falta compararla de nuevo con Verdadero.",
+    code: {
+      label: "Pseudocódigo",
+      content: `cuentaActiva <- Verdadero\n\nSi cuentaActiva Entonces\n    Escribir "Acceso permitido"\nSino\n    Escribir "Activa tu cuenta"\nFinSi`,
+    },
+    notes: [
+      "Si cuentaActiva se lee como una pregunta clara.",
+      "Evita escribir Si cuentaActiva = Verdadero cuando la variable ya es booleana.",
+      "Más adelante profundizarás en operadores y estructuras condicionales.",
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Ejercicio · 11 de 14",
+    title: "Administra la verificación de un correo",
+    instructions:
+      "Elige la instrucción adecuada para cada momento del proceso y comprueba tus respuestas.",
+    questions: [
+      {
+        id: "new-account",
+        question: "Una cuenta acaba de registrarse. ¿Cómo inicia la bandera?",
+        options: [
+          { id: "a", label: "correoVerificado <- Falso" },
+          { id: "b", label: "correoVerificado <- Verdadero" },
+          { id: "c", label: 'correoVerificado <- "Pendiente"' },
+        ],
+        correctId: "a",
+        explanation: "El correo todavía no se ha confirmado, así que su estado inicial es Falso.",
+      },
+      {
+        id: "verified-email",
+        question: "La persona abre el enlace de verificación. ¿Qué actualización corresponde?",
+        options: [
+          { id: "a", label: "correoVerificado <- Falso" },
+          { id: "b", label: "correoVerificado <- Verdadero" },
+          { id: "c", label: "correoVerificado <- 1" },
+        ],
+        correctId: "b",
+        explanation: "El evento de confirmación cambia la bandera a Verdadero.",
+      },
+      {
+        id: "check-email",
+        question: "¿Cuál condición consulta la bandera de forma directa?",
+        options: [
+          { id: "a", label: "Si correoVerificado Entonces" },
+          { id: "b", label: 'Si correoVerificado = "Verdadero" Entonces' },
+          { id: "c", label: "Si correoVerificado = 1 Entonces" },
+        ],
+        correctId: "a",
+        explanation: "La bandera ya contiene una condición y puede consultarse directamente.",
+      },
+    ],
+    explanation:
+      "Una bandera útil inicia con el estado real, se actualiza cuando ocurre el evento y se consulta como una condición directa.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Ejercicio aplicado · 12 de 14",
+    title: "Ordena el ciclo de una bandera",
+    instructions:
+      "Ordena las instrucciones para declarar, iniciar, actualizar y mostrar el estado de un perfil.",
+    blocks: [
+      { id: "declare", text: "Definir perfilVerificado Como Logico" },
+      { id: "initialize", text: "perfilVerificado <- Falso" },
+      { id: "event", text: 'Escribir "Verificando perfil..."' },
+      { id: "update", text: "perfilVerificado <- Verdadero" },
+      { id: "output", text: "Escribir perfilVerificado" },
+    ],
+    correctOrder: ["declare", "initialize", "event", "update", "output"],
+    explanation:
+      "Primero se declara e inicializa la bandera. Después ocurre el evento, se actualiza el estado y al final se muestra su valor actual.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 13 de 14",
+    title: "Lo esencial del uso de booleanos",
+    takeaways: [
+      "Usa un booleano cuando el dato tenga exactamente dos estados opuestos.",
+      "El nombre de una bandera debe poder leerse como una pregunta de sí o no.",
+      "Inicializa la bandera con el estado real antes de que ocurra cualquier evento.",
+      "Verdadero y Falso no llevan comillas; con comillas serían cadenas de texto.",
+      "Actualiza una sola fuente de verdad y consulta la bandera directamente en las decisiones.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 14 de 14",
+    title: "Pantalla de retroalimentación",
+    message:
+      "Revisa tus respuestas para confirmar que puedes modelar, inicializar, actualizar y consultar estados booleanos en situaciones reales.",
+  },
+];
+
 const operadoresSteps: LessonStep[] = [
   {
     kind: "concept",
@@ -1721,6 +1958,886 @@ const operadoresSteps: LessonStep[] = [
     title: "Pantalla de retroalimentación",
     message:
       "Revisa tus respuestas para confirmar que reconoces cómo calcular, asignar, comparar y combinar condiciones con operadores.",
+  },
+];
+
+const operadoresAritmeticosSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 13",
+    title: "Calcula con intención",
+    paragraphs: [
+      "Ya conoces los operadores de suma (+), resta (-), multiplicación (*), división (/) y residuo (%). Ahora aprenderás a combinarlos de forma predecible en JavaScript.",
+      "Una expresión aritmética correcta no solo obtiene un resultado: también deja claro qué se calcula y en qué orden.",
+    ],
+    code: {
+      label: "JavaScript",
+      content: `const precio = 80;\nconst cantidad = 3;\nconst total = precio * cantidad;\n\nconsole.log(total); // 240`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Precedencia · 2 de 13",
+    title: "JavaScript sigue un orden",
+    description:
+      "Las operaciones no siempre se resuelven de izquierda a derecha. La precedencia determina cuál se evalúa primero.",
+    table: {
+      headers: ["Prioridad", "Operadores", "Regla"],
+      rows: [
+        ["1", "( )", "Primero lo agrupado entre paréntesis."],
+        ["2", "**", "Después las potencias."],
+        ["3", "*  /  %", "Luego multiplicación, división y residuo."],
+        ["4", "+  -", "Al final suma y resta."],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Interpretación · 3 de 13",
+    title: "Los paréntesis cambian el resultado",
+    description:
+      "Compara las dos expresiones. Los mismos números producen resultados distintos porque cambia la agrupación.",
+    code: {
+      label: "JavaScript",
+      content: `const resultadoA = 10 + 2 * 3;\nconst resultadoB = (10 + 2) * 3;\n\nconsole.log(resultadoA); // 16\nconsole.log(resultadoB); // 36`,
+    },
+    notes: [
+      "En resultadoA, la multiplicación ocurre antes que la suma.",
+      "En resultadoB, los paréntesis obligan a sumar primero.",
+      "Usa paréntesis cuando ayuden a comunicar la intención del cálculo.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 1 · 4 de 13",
+    question: "¿Qué valor guarda resultado?",
+    code: {
+      label: "JavaScript",
+      content: `const resultado = 2 + 3 * 4;`,
+    },
+    options: [
+      { id: "a", label: "20" },
+      { id: "b", label: "14" },
+      { id: "c", label: "24" },
+      { id: "d", label: "11" },
+    ],
+    correctId: "b",
+    explanation: "La multiplicación se calcula primero: 3 * 4 = 12; después 2 + 12 = 14.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Agrupación · 5 de 13",
+    title: "Calcula un promedio correctamente",
+    description:
+      "Para obtener un promedio, primero se suman todos los valores y después se divide el total. Los paréntesis hacen explícito ese orden.",
+    code: {
+      label: "JavaScript",
+      content: `const parcial1 = 82;\nconst parcial2 = 90;\nconst parcial3 = 88;\n\nconst promedio = (parcial1 + parcial2 + parcial3) / 3;\nconsole.log(promedio); // 86.666...`,
+    },
+    notes: [
+      "Sin paréntesis, solo parcial3 se dividiría entre 3 antes de las sumas.",
+      "JavaScript puede producir resultados decimales aunque los operandos sean enteros.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 2 · 6 de 13",
+    question: "¿Cuál expresión calcula el promedio de tres notas?",
+    options: [
+      { id: "a", label: "nota1 + nota2 + nota3 / 3" },
+      { id: "b", label: "(nota1 + nota2 + nota3) / 3" },
+      { id: "c", label: "nota1 + (nota2 / nota3)" },
+      { id: "d", label: "3 / (nota1 + nota2 + nota3)" },
+    ],
+    correctId: "b",
+    explanation:
+      "Los paréntesis agrupan la suma completa para dividir el total entre la cantidad de notas.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Residuo · 7 de 13",
+    title: "El operador % resuelve patrones",
+    description:
+      "El módulo devuelve el residuo de una división. Es útil para reconocer ciclos, alternar turnos y comprobar divisibilidad.",
+    bullets: [
+      { bold: "Par o impar:", text: "numero % 2 produce 0 cuando el número es par." },
+      { bold: "Ciclos:", text: "indice % cantidad reinicia una posición dentro de un rango." },
+      {
+        bold: "Agrupación:",
+        text: "objetos % capacidad indica cuántos quedan fuera de grupos completos.",
+      },
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 3 · 8 de 13",
+    question: "¿Qué muestra este código?",
+    code: {
+      label: "JavaScript",
+      content: `const sobrantes = 17 % 5;\nconsole.log(sobrantes);`,
+    },
+    options: [
+      { id: "a", label: "2" },
+      { id: "b", label: "3.4" },
+      { id: "c", label: "5" },
+      { id: "d", label: "15" },
+    ],
+    correctId: "a",
+    explanation: "En 17 caben tres grupos de 5 y sobran 2; ese residuo es el resultado de 17 % 5.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Caso práctico · 9 de 13",
+    title: "Construye el total de una compra",
+    description:
+      "Divide un cálculo grande en resultados intermedios con nombres claros. Así es más fácil verificar cada parte.",
+    code: {
+      label: "JavaScript",
+      content: `const precio = 250;\nconst cantidad = 2;\nconst envio = 80;\nconst tasaIva = 0.16;\n\nconst subtotal = precio * cantidad;\nconst iva = subtotal * tasaIva;\nconst total = subtotal + iva + envio;\n\nconsole.log(total); // 660`,
+    },
+    notes: [
+      "subtotal combina precio y cantidad.",
+      "iva se calcula sobre el subtotal, no sobre el envío.",
+      "total reúne los resultados cuando cada parte ya tiene significado.",
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Interpretación · 10 de 13",
+    title: "Predice cada resultado",
+    instructions: "Elige el resultado correcto sin ejecutar el código.",
+    questions: [
+      {
+        id: "precedence",
+        question: "const valor = 6 + 4 / 2;",
+        options: [
+          { id: "a", label: "5" },
+          { id: "b", label: "8" },
+          { id: "c", label: "10" },
+        ],
+        correctId: "b",
+        explanation: "Primero 4 / 2 = 2; luego 6 + 2 = 8.",
+      },
+      {
+        id: "grouping",
+        question: "const valor = (6 + 4) / 2;",
+        options: [
+          { id: "a", label: "5" },
+          { id: "b", label: "8" },
+          { id: "c", label: "10" },
+        ],
+        correctId: "a",
+        explanation: "Los paréntesis producen 10 y después 10 / 2 = 5.",
+      },
+      {
+        id: "remainder",
+        question: "const valor = 23 % 10;",
+        options: [
+          { id: "a", label: "2" },
+          { id: "b", label: "2.3" },
+          { id: "c", label: "3" },
+        ],
+        correctId: "c",
+        explanation: "Dos grupos de 10 ocupan 20 y quedan 3.",
+      },
+    ],
+    explanation:
+      "Interpretar la precedencia y la agrupación permite comprobar una expresión antes de ejecutarla.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 11 de 13",
+    title: "Ordena el cálculo de una factura",
+    instructions:
+      "Ordena las instrucciones para definir los datos, calcular el subtotal, obtener el impuesto y mostrar el total.",
+    blocks: [
+      { id: "data", text: "const precio = 120; const cantidad = 3;" },
+      { id: "rate", text: "const tasaImpuesto = 0.16;" },
+      { id: "subtotal", text: "const subtotal = precio * cantidad;" },
+      { id: "tax", text: "const impuesto = subtotal * tasaImpuesto;" },
+      { id: "output", text: "console.log(subtotal + impuesto);" },
+    ],
+    correctOrder: ["data", "rate", "subtotal", "tax", "output"],
+    explanation:
+      "Los operandos deben existir antes de usarse y cada resultado intermedio alimenta el siguiente cálculo.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 12 de 13",
+    title: "Aritmética confiable en JavaScript",
+    takeaways: [
+      "La precedencia determina qué operación se ejecuta primero.",
+      "Los paréntesis agrupan operaciones y comunican la intención.",
+      "El operador % devuelve un residuo y ayuda a reconocer patrones.",
+      "Los resultados intermedios con nombres claros simplifican cálculos grandes.",
+      "Conviene predecir y revisar el resultado antes de integrarlo a una aplicación.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 13 de 13",
+    title: "Resultados de operadores aritméticos",
+    message:
+      "Revisa tu puntuación para confirmar que puedes interpretar precedencia, agrupación, residuos y cálculos aplicados.",
+  },
+];
+
+const operadoresAsignacionSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 13",
+    title: "Actualiza el estado de un programa",
+    paragraphs: [
+      "El operador **=** guarda un valor. Los operadores compuestos actualizan una variable usando su valor actual.",
+      "Esta idea aparece en contadores, inventarios, saldos, marcadores y cualquier dato que cambia durante la ejecución.",
+    ],
+    code: {
+      label: "JavaScript",
+      content: `let puntos = 10;\npuntos += 5;\n\nconsole.log(puntos); // 15`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Equivalencias · 2 de 13",
+    title: "Asignación compuesta",
+    description:
+      "Cada operador compuesto calcula un nuevo valor y lo guarda de nuevo en la misma variable.",
+    table: {
+      headers: ["Forma corta", "Equivale a", "Uso frecuente"],
+      rows: [
+        ["x += 4", "x = x + 4", "Acumular"],
+        ["x -= 4", "x = x - 4", "Descontar"],
+        ["x *= 4", "x = x * 4", "Escalar"],
+        ["x /= 4", "x = x / 4", "Repartir"],
+        ["x %= 4", "x = x % 4", "Conservar el residuo"],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Seguimiento · 3 de 13",
+    title: "Lee las actualizaciones en secuencia",
+    description:
+      "Cada instrucción trabaja con el valor que dejó la anterior. Seguir el estado paso a paso evita suposiciones.",
+    code: {
+      label: "JavaScript",
+      content: `let saldo = 100;\nsaldo += 50; // 150\nsaldo -= 30; // 120\nsaldo *= 2;  // 240\n\nconsole.log(saldo); // 240`,
+    },
+    notes: [
+      "La variable saldo puede cambiar porque fue declarada con let.",
+      "Los comentarios muestran el valor después de cada asignación.",
+      "El orden de las actualizaciones sí altera el resultado final.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 1 · 4 de 13",
+    question: "¿Qué valor final tiene intentos?",
+    code: {
+      label: "JavaScript",
+      content: `let intentos = 2;\nintentos += 3;\nintentos -= 1;`,
+    },
+    options: [
+      { id: "a", label: "2" },
+      { id: "b", label: "3" },
+      { id: "c", label: "4" },
+      { id: "d", label: "5" },
+    ],
+    correctId: "c",
+    explanation: "La secuencia produce 2 + 3 = 5 y después 5 - 1 = 4.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Incremento · 5 de 13",
+    title: "Cambios de una unidad",
+    description:
+      "Los operadores ++ y -- son atajos relacionados para aumentar o reducir una variable exactamente en una unidad.",
+    code: {
+      label: "JavaScript",
+      content: `let pagina = 1;\npagina++; // equivale a pagina += 1\npagina++;\npagina--;\n\nconsole.log(pagina); // 2`,
+    },
+    notes: [
+      "++ sirve para contadores ascendentes.",
+      "-- sirve para retroceder o reducir una unidad.",
+      "Para cambios distintos de uno, usa += o -=.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 2 · 6 de 13",
+    question: "¿Qué instrucción aumenta cantidad en una unidad?",
+    options: [
+      { id: "a", label: "cantidad = 1" },
+      { id: "b", label: "cantidad++" },
+      { id: "c", label: "cantidad == 1" },
+      { id: "d", label: "cantidad *= 1" },
+    ],
+    correctId: "b",
+    explanation: "cantidad++ toma el valor actual, suma uno y guarda el nuevo valor.",
+  },
+  {
+    kind: "tip",
+    eyebrow: "Mutabilidad · 7 de 13",
+    title: "Usa let cuando el valor deba cambiar",
+    body: "Una variable declarada con const no puede recibir una nueva asignación. Si puntos debe actualizarse, declárala con let. Reserva const para referencias que no serán reasignadas.",
+    icon: "Lightbulb",
+    variant: "tip",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Caso práctico · 8 de 13",
+    title: "Controla un inventario",
+    description:
+      "El inventario cambia con entradas y ventas. Una sola variable conserva la cantidad disponible más reciente.",
+    code: {
+      label: "JavaScript",
+      content: `let existencias = 20;\n\nconst recibidas = 8;\nexistencias += recibidas; // 28\n\nconst vendidas = 5;\nexistencias -= vendidas; // 23\n\nconsole.log(existencias);`,
+    },
+    notes: [
+      "Las cantidades de cada movimiento no cambian y pueden ser const.",
+      "existencias usa let porque representa un estado que se actualiza.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 3 · 9 de 13",
+    question: "¿Qué muestra este código?",
+    code: {
+      label: "JavaScript",
+      content: `let nivel = 3;\nnivel *= 2;\nnivel += 1;\nconsole.log(nivel);`,
+    },
+    options: [
+      { id: "a", label: "6" },
+      { id: "b", label: "7" },
+      { id: "c", label: "8" },
+      { id: "d", label: "9" },
+    ],
+    correctId: "b",
+    explanation: "Primero nivel se duplica a 6 y después aumenta a 7.",
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Decisiones · 10 de 13",
+    title: "Elige la actualización adecuada",
+    instructions: "Selecciona la instrucción que representa cada cambio.",
+    questions: [
+      {
+        id: "earn-points",
+        question: "Una persona gana 25 puntos.",
+        options: [
+          { id: "a", label: "puntos += 25" },
+          { id: "b", label: "puntos = 25" },
+          { id: "c", label: "puntos -= 25" },
+        ],
+        correctId: "a",
+        explanation: "+= conserva los puntos anteriores y agrega 25.",
+      },
+      {
+        id: "use-life",
+        question: "El jugador pierde una vida.",
+        options: [
+          { id: "a", label: "vidas++" },
+          { id: "b", label: "vidas--" },
+          { id: "c", label: "vidas *= 1" },
+        ],
+        correctId: "b",
+        explanation: "-- reduce el valor actual exactamente en una unidad.",
+      },
+      {
+        id: "double-score",
+        question: "Un bono duplica el marcador actual.",
+        options: [
+          { id: "a", label: "marcador += 2" },
+          { id: "b", label: "marcador = 2" },
+          { id: "c", label: "marcador *= 2" },
+        ],
+        correctId: "c",
+        explanation: "*= 2 multiplica por dos el valor que ya tenía el marcador.",
+      },
+    ],
+    explanation:
+      "La operación correcta depende de cómo debe transformarse el estado actual, no solo del número involucrado.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 11 de 13",
+    title: "Actualiza un carrito",
+    instructions:
+      "Ordena el flujo para iniciar el carrito, agregar productos, retirar uno y mostrar la cantidad final.",
+    blocks: [
+      { id: "start", text: "let productos = 0;" },
+      { id: "add-first", text: "productos += 3;" },
+      { id: "add-second", text: "productos += 2;" },
+      { id: "remove", text: "productos--;" },
+      { id: "show", text: "console.log(productos); // 4" },
+    ],
+    correctOrder: ["start", "add-first", "add-second", "remove", "show"],
+    explanation:
+      "El estado inicia en cero y cada operación modifica el valor producido por la instrucción anterior.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 12 de 13",
+    title: "Asignaciones que expresan cambios",
+    takeaways: [
+      "= reemplaza el valor de una variable.",
+      "Los operadores compuestos calculan y reasignan en una sola instrucción.",
+      "++ y -- cambian un contador exactamente en una unidad.",
+      "Las actualizaciones se interpretan en orden y usan el estado más reciente.",
+      "Declara con let los valores que deben ser reasignados y con const los que no.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 13 de 13",
+    title: "Resultados de operadores de asignación",
+    message:
+      "Revisa tus respuestas para confirmar que puedes elegir, seguir y aplicar actualizaciones de estado en JavaScript.",
+  },
+];
+
+const operadoresComparacionSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 13",
+    title: "Convierte reglas en respuestas booleanas",
+    paragraphs: [
+      "Una comparación responde **true** o **false**. Ese resultado permite validar datos, controlar límites y preparar decisiones.",
+      "La clave no es memorizar símbolos: es traducir con precisión una regla del problema a una expresión de JavaScript.",
+    ],
+    code: {
+      label: "JavaScript",
+      content: `const edad = 20;\nconst puedeRegistrarse = edad >= 18;\n\nconsole.log(puedeRegistrarse); // true`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Igualdad estricta · 2 de 13",
+    title: "Compara valor y tipo",
+    description:
+      "En JavaScript se recomienda la igualdad estricta porque evita conversiones automáticas inesperadas.",
+    table: {
+      headers: ["Operador", "Pregunta", "Ejemplo"],
+      rows: [
+        ["===", "¿Mismo valor y mismo tipo?", "5 === 5  // true"],
+        ["!==", "¿Distinto valor o tipo?", '5 !== "5"  // true'],
+        [">", "¿Mayor que?", "8 > 3  // true"],
+        ["<", "¿Menor que?", "8 < 3  // false"],
+        [">=", "¿Mayor o igual?", "18 >= 18  // true"],
+        ["<=", "¿Menor o igual?", "10 <= 9  // false"],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Tipos · 3 de 13",
+    title: "Un número y un texto no son lo mismo",
+    description:
+      'Aunque se vean parecidos, 10 y "10" representan tipos diferentes. La comparación estricta conserva esa diferencia.',
+    code: {
+      label: "JavaScript",
+      content: `const cantidad = 10;\nconst entrada = "10";\n\nconsole.log(cantidad === entrada); // false\nconsole.log(cantidad === Number(entrada)); // true`,
+    },
+    notes: [
+      "=== no convierte los valores antes de compararlos.",
+      "Number(entrada) realiza una conversión explícita y visible.",
+      "Evita == cuando quieras resultados predecibles para principiantes y equipos de trabajo.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 1 · 4 de 13",
+    question: "¿Qué resultado produce la expresión?",
+    code: {
+      label: "JavaScript",
+      content: `"25" === 25`,
+    },
+    options: [
+      { id: "a", label: "true, porque ambos representan 25." },
+      { id: "b", label: "false, porque sus tipos son diferentes." },
+      { id: "c", label: "25, porque JavaScript los suma." },
+      { id: "d", label: "Un error de sintaxis." },
+    ],
+    correctId: "b",
+    explanation: "=== compara tanto el valor como el tipo: uno es string y el otro es number.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Límites · 5 de 13",
+    title: "Decide si el borde cuenta",
+    description:
+      "Los operadores con igualdad incluyen el valor límite. Esta diferencia es importante en edades, cupos, calificaciones y rangos.",
+    code: {
+      label: "JavaScript",
+      content: `const calificacion = 70;\n\nconst superaSetenta = calificacion > 70;   // false\nconst alcanzaSetenta = calificacion >= 70; // true`,
+    },
+    notes: [
+      "> excluye el valor del límite.",
+      ">= incluye el valor del límite.",
+      "La palabra 'al menos' suele indicar >= y 'como máximo' suele indicar <=.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 2 · 6 de 13",
+    question:
+      "Una promoción aplica a compras de al menos $500. ¿Qué comparación representa la regla?",
+    options: [
+      { id: "a", label: "total > 500" },
+      { id: "b", label: "total >= 500" },
+      { id: "c", label: "total === 500" },
+      { id: "d", label: "total <= 500" },
+    ],
+    correctId: "b",
+    explanation: "Al menos incluye 500 y todos los valores mayores, por eso se usa >=.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Texto · 7 de 13",
+    title: "Las cadenas se comparan por orden",
+    description:
+      "JavaScript compara cadenas carácter por carácter. Por eso, si esperas números provenientes de un formulario, conviene convertirlos antes de comparar.",
+    callouts: [
+      {
+        icon: "CaseSensitive",
+        title: "Mayúsculas y minúsculas importan",
+        description: '"admin" === "Admin" produce false porque las cadenas no son idénticas.',
+      },
+      {
+        icon: "BadgeAlert",
+        title: "Convierte entradas numéricas",
+        description:
+          "Usa Number(valor) antes de comparar cantidades recibidas como texto desde una interfaz.",
+      },
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 3 · 8 de 13",
+    question: '¿Qué expresión comprueba que el rol sea exactamente el texto "admin"?',
+    options: [
+      { id: "a", label: 'rol = "admin"' },
+      { id: "b", label: 'rol === "admin"' },
+      { id: "c", label: 'rol !== "admin"' },
+      { id: "d", label: 'rol >= "admin"' },
+    ],
+    correctId: "b",
+    explanation: "=== comprueba igualdad estricta sin modificar la variable rol.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Caso práctico · 9 de 13",
+    title: "Valida un rango de inventario",
+    description:
+      "Guarda comparaciones con nombres que expresen la regla. Luego pueden reutilizarse en mensajes o decisiones.",
+    code: {
+      label: "JavaScript",
+      content: `const existencias = 4;\nconst minimo = 5;\nconst maximo = 40;\n\nconst necesitaReposicion = existencias < minimo;\nconst excedeCapacidad = existencias > maximo;\n\nconsole.log(necesitaReposicion); // true\nconsole.log(excedeCapacidad);    // false`,
+    },
+    notes: [
+      "Las comparaciones no cambian existencias.",
+      "Cada resultado booleano responde una pregunta distinta.",
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Traducción · 10 de 13",
+    title: "Convierte reglas en comparaciones",
+    instructions: "Selecciona la expresión que representa cada requisito.",
+    questions: [
+      {
+        id: "capacity",
+        question: "El cupo no puede superar 30 personas.",
+        options: [
+          { id: "a", label: "personas < 30" },
+          { id: "b", label: "personas <= 30" },
+          { id: "c", label: "personas === 30" },
+        ],
+        correctId: "b",
+        explanation: "No superar 30 permite cualquier valor menor o igual a 30.",
+      },
+      {
+        id: "different-user",
+        question: "El usuario nuevo debe ser distinto del usuario actual.",
+        options: [
+          { id: "a", label: "nuevoUsuario !== usuarioActual" },
+          { id: "b", label: "nuevoUsuario === usuarioActual" },
+          { id: "c", label: "nuevoUsuario = usuarioActual" },
+        ],
+        correctId: "a",
+        explanation: "!== devuelve true cuando los valores o sus tipos son diferentes.",
+      },
+      {
+        id: "adult",
+        question: "La edad mínima es 18 años.",
+        options: [
+          { id: "a", label: "edad > 18" },
+          { id: "b", label: "edad === 18" },
+          { id: "c", label: "edad >= 18" },
+        ],
+        correctId: "c",
+        explanation: "La edad mínima incluye 18 y cualquier valor mayor.",
+      },
+    ],
+    explanation:
+      "Palabras como mínimo, máximo, exactamente y distinto ayudan a elegir el operador correcto.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 11 de 13",
+    title: "Compara una entrada de formulario",
+    instructions:
+      "Ordena las instrucciones para recibir una edad como texto, convertirla, compararla y mostrar el resultado.",
+    blocks: [
+      { id: "input", text: 'const entradaEdad = "21";' },
+      { id: "convert", text: "const edad = Number(entradaEdad);" },
+      { id: "compare", text: "const esMayorDeEdad = edad >= 18;" },
+      { id: "show", text: "console.log(esMayorDeEdad);" },
+    ],
+    correctOrder: ["input", "convert", "compare", "show"],
+    explanation:
+      "La conversión explícita prepara un número real antes de aplicar la comparación del requisito.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 12 de 13",
+    title: "Comparaciones precisas",
+    takeaways: [
+      "Toda comparación produce true o false.",
+      "=== y !== consideran tanto el valor como el tipo.",
+      ">= y <= incluyen el valor del límite; > y < lo excluyen.",
+      "Las entradas de texto deben convertirse explícitamente antes de compararlas como números.",
+      "Un nombre booleano claro documenta la regla que se evaluó.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 13 de 13",
+    title: "Resultados de operadores de comparación",
+    message:
+      "Revisa tus resultados para confirmar que puedes comparar tipos, interpretar límites y traducir requisitos a JavaScript.",
+  },
+];
+
+const operadoresLogicosSteps: LessonStep[] = [
+  {
+    kind: "concept",
+    eyebrow: "Aplicación · 1 de 13",
+    title: "Combina preguntas booleanas",
+    paragraphs: [
+      "Los operadores lógicos trabajan con condiciones que ya producen **true** o **false**.",
+      "Con **&&**, **||** y **!** puedes expresar reglas compuestas sin perder de vista qué debe cumplirse.",
+    ],
+    code: {
+      label: "JavaScript",
+      content: `const tieneCuenta = true;\nconst correoVerificado = true;\n\nconst puedeEntrar = tieneCuenta && correoVerificado;\nconsole.log(puedeEntrar); // true`,
+    },
+  },
+  {
+    kind: "theory",
+    eyebrow: "Tabla de verdad · 2 de 13",
+    title: "Cuándo devuelve true cada operador",
+    description:
+      "Una tabla de verdad permite comprobar el resultado de combinar dos condiciones sin depender de un caso concreto.",
+    table: {
+      headers: ["A", "B", "A && B", "A || B"],
+      rows: [
+        ["true", "true", "true", "true"],
+        ["true", "false", "false", "true"],
+        ["false", "true", "false", "true"],
+        ["false", "false", "false", "false"],
+      ],
+    },
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "AND · 3 de 13",
+    title: "&& exige todas las condiciones",
+    description:
+      "Usa AND cuando cada requisito sea obligatorio. Si una sola condición es false, el resultado completo será false.",
+    code: {
+      label: "JavaScript",
+      content: `const promedio = 88;\nconst asistencia = 92;\n\nconst apruebaCurso = promedio >= 70 && asistencia >= 80;\nconsole.log(apruebaCurso); // true`,
+    },
+    notes: [
+      "promedio >= 70 produce true.",
+      "asistencia >= 80 también produce true.",
+      "Como ambos requisitos se cumplen, && produce true.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 1 · 4 de 13",
+    question: "¿Qué valor tiene acceso?",
+    code: {
+      label: "JavaScript",
+      content: `const tienePase = true;\nconst eventoActivo = false;\nconst acceso = tienePase && eventoActivo;`,
+    },
+    options: [
+      { id: "a", label: "true" },
+      { id: "b", label: "false" },
+      { id: "c", label: "undefined" },
+      { id: "d", label: "Un error" },
+    ],
+    correctId: "b",
+    explanation: "&& solo produce true cuando las dos condiciones son true; eventoActivo es false.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "OR · 5 de 13",
+    title: "|| acepta alternativas",
+    description: "Usa OR cuando basta con cumplir una de varias opciones válidas.",
+    code: {
+      label: "JavaScript",
+      content: `const esAdministrador = false;\nconst esEditor = true;\n\nconst puedePublicar = esAdministrador || esEditor;\nconsole.log(puedePublicar); // true`,
+    },
+    notes: [
+      "No es obligatorio que ambas condiciones sean true.",
+      "El permiso de editor ya hace verdadera la regla completa.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 2 · 6 de 13",
+    question:
+      "Una persona puede pagar con tarjeta o con efectivo. ¿Qué operador combina las alternativas?",
+    options: [
+      { id: "a", label: "&&" },
+      { id: "b", label: "||" },
+      { id: "c", label: "!" },
+      { id: "d", label: "===" },
+    ],
+    correctId: "b",
+    explanation: "|| produce true cuando al menos una de las alternativas es válida.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "NOT · 7 de 13",
+    title: "! invierte una condición",
+    description:
+      "NOT transforma true en false y false en true. Resulta útil cuando la regla se expresa como ausencia o negación.",
+    code: {
+      label: "JavaScript",
+      content: `const cuentaBloqueada = false;\nconst puedeIniciarSesion = !cuentaBloqueada;\n\nconsole.log(puedeIniciarSesion); // true`,
+    },
+    notes: [
+      "! no cambia cuentaBloqueada; produce un valor booleano nuevo.",
+      "Evita dobles negaciones difíciles de leer mediante nombres positivos cuando sea posible.",
+    ],
+  },
+  {
+    kind: "theory",
+    eyebrow: "Agrupación · 8 de 13",
+    title: "Haz explícita la prioridad",
+    description:
+      "JavaScript evalúa primero !, después && y al final ||. En reglas mixtas, los paréntesis muestran la intención y evitan lecturas ambiguas.",
+    table: {
+      headers: ["Regla", "Expresión clara"],
+      rows: [
+        ["Debe tener cuenta y además ser admin o editor", "tieneCuenta && (esAdmin || esEditor)"],
+        ["No debe estar suspendido", "!estaSuspendido"],
+        ["Debe aceptar ambas políticas", "aceptaTerminos && aceptaPrivacidad"],
+      ],
+    },
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Pregunta 3 · 9 de 13",
+    question: "¿Qué valor produce la expresión?",
+    code: {
+      label: "JavaScript",
+      content: `const activo = true;\nconst suspendido = false;\nconst disponible = activo && !suspendido;`,
+    },
+    options: [
+      { id: "a", label: "true" },
+      { id: "b", label: "false" },
+      { id: "c", label: "suspendido" },
+      { id: "d", label: "undefined" },
+    ],
+    correctId: "a",
+    explanation: "!false produce true; por lo tanto true && true produce true.",
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Reglas prácticas · 10 de 13",
+    title: "Elige la composición correcta",
+    instructions: "Selecciona la expresión que representa cada regla de negocio.",
+    questions: [
+      {
+        id: "download",
+        question: "Para descargar, la sesión debe estar activa y el archivo disponible.",
+        options: [
+          { id: "a", label: "sesionActiva && archivoDisponible" },
+          { id: "b", label: "sesionActiva || archivoDisponible" },
+          { id: "c", label: "!sesionActiva" },
+        ],
+        correctId: "a",
+        explanation: "Las dos condiciones son obligatorias, por eso se usa &&.",
+      },
+      {
+        id: "support",
+        question: "Puede responder soporte una persona administradora o moderadora.",
+        options: [
+          { id: "a", label: "esAdmin && esModerador" },
+          { id: "b", label: "esAdmin || esModerador" },
+          { id: "c", label: "!esModerador" },
+        ],
+        correctId: "b",
+        explanation: "Cualquiera de los dos roles es suficiente, por eso se usa ||.",
+      },
+      {
+        id: "unblocked",
+        question: "La cuenta debe no estar bloqueada.",
+        options: [
+          { id: "a", label: "cuentaBloqueada && true" },
+          { id: "b", label: "cuentaBloqueada || false" },
+          { id: "c", label: "!cuentaBloqueada" },
+        ],
+        correctId: "c",
+        explanation: "! invierte el valor de cuentaBloqueada.",
+      },
+    ],
+    explanation:
+      "Busca si la regla exige todo, acepta alternativas o niega un estado para elegir &&, || o !.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 11 de 13",
+    title: "Construye una regla de acceso",
+    instructions:
+      "Ordena las instrucciones para definir estados, crear una regla agrupada y mostrar el permiso.",
+    blocks: [
+      { id: "session", text: "const sesionActiva = true;" },
+      { id: "admin", text: "const esAdmin = false;" },
+      { id: "editor", text: "const esEditor = true;" },
+      {
+        id: "rule",
+        text: "const puedeEditar = sesionActiva && (esAdmin || esEditor);",
+      },
+      { id: "show", text: "console.log(puedeEditar); // true" },
+    ],
+    correctOrder: ["session", "admin", "editor", "rule", "show"],
+    explanation:
+      "Primero existen las condiciones simples; después se agrupan los roles alternativos y se exige una sesión activa.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 12 de 13",
+    title: "Reglas lógicas legibles",
+    takeaways: [
+      "&& exige que todas las condiciones sean true.",
+      "|| produce true cuando al menos una alternativa es true.",
+      "! invierte el valor booleano de una condición.",
+      "La prioridad es !, luego && y finalmente ||.",
+      "Los paréntesis y los nombres claros hacen comprensibles las reglas mixtas.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 13 de 13",
+    title: "Resultados de operadores lógicos",
+    message:
+      "Revisa tu puntuación para confirmar que puedes combinar, negar y agrupar condiciones en reglas prácticas.",
   },
 ];
 
@@ -1949,6 +3066,417 @@ const estructurasCondicionalesSteps: LessonStep[] = [
     title: "Pantalla de retroalimentación",
     message:
       "Revisa tus respuestas para confirmar que puedes elegir entre if, if...else y switch según el tipo de decisión.",
+  },
+];
+
+const condicionalesProfundidadSteps: LessonStep[] = [
+  {
+    kind: "theory",
+    eyebrow: "Profundización · 1 de 17",
+    title: "Diseña decisiones completas",
+    description:
+      "Ya sabes elegir entre if, if...else y switch. Ahora aprenderás a construir decisiones que sigan funcionando en los límites, comuniquen su intención y sean fáciles de modificar.",
+    bullets: [
+      {
+        bold: "Cobertura:",
+        text: "cada valor posible debe tener un camino previsto o una salida segura.",
+      },
+      {
+        bold: "Exclusividad:",
+        text: "si los casos no deben ejecutarse juntos, ordénalos dentro de una sola cadena if...else if...else.",
+      },
+      {
+        bold: "Claridad:",
+        text: "nombra reglas complejas y evita niveles innecesarios de anidación.",
+      },
+    ],
+    callouts: [
+      {
+        icon: "GitBranch",
+        title: "Objetivo práctico",
+        description:
+          "Interpretar, depurar y refactorizar decisiones reales escritas en JavaScript.",
+      },
+    ],
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Rangos · 2 de 17",
+    title: "Ordena de lo específico a lo general",
+    description:
+      "En una cadena else if, JavaScript ejecuta el primer caso verdadero. Por eso conviene comprobar primero el rango más exigente.",
+    code: {
+      label: "JavaScript",
+      content: `const total = 1250;
+let descuento;
+
+if (total >= 1000) {
+  descuento = 0.2;
+} else if (total >= 500) {
+  descuento = 0.1;
+} else {
+  descuento = 0;
+}
+
+console.log(descuento); // 0.2`,
+    },
+    notes: [
+      "Si total cumple el primer caso, los casos restantes ya no se evalúan.",
+      "Comprobar total >= 500 primero impediría alcanzar el descuento de 20 %.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 3 de 17",
+    question: "¿Qué imprime este código?",
+    code: {
+      label: "JavaScript",
+      content: `const temperatura = 30;
+
+if (temperatura >= 20) {
+  console.log("Templado");
+} else if (temperatura >= 30) {
+  console.log("Caluroso");
+} else {
+  console.log("Frío");
+}`,
+    },
+    options: [
+      { id: "a", label: '"Templado"' },
+      { id: "b", label: '"Caluroso"' },
+      { id: "c", label: '"Frío"' },
+      { id: "d", label: '"Templado" y "Caluroso"' },
+    ],
+    correctId: "a",
+    explanation:
+      "30 cumple temperatura >= 20 y la cadena se detiene. El caso más específico, temperatura >= 30, debería aparecer primero.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Límites · 4 de 17",
+    title: "Evita huecos y solapamientos",
+    description:
+      "Los errores suelen aparecer justo en valores como 0, 18 o 100. Define cada intervalo antes de escribir el código y decide quién incluye el límite.",
+    table: {
+      headers: ["Regla", "Condición en JavaScript"],
+      rows: [
+        ["Menor de edad", "edad < 18"],
+        ["De 18 a 64 años", "edad >= 18 && edad < 65"],
+        ["65 años o más", "edad >= 65"],
+      ],
+    },
+    bullets: [
+      {
+        bold: "Prueba mínima:",
+        text: "comprueba un valor debajo, uno exactamente en el límite y uno encima.",
+      },
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Depuración · 5 de 17",
+    question: "La mayoría de edad comienza a los 18. ¿Qué cambio corrige la condición?",
+    code: {
+      label: "JavaScript",
+      content: `const edad = 18;
+
+if (edad > 18) {
+  console.log("Mayor de edad");
+} else {
+  console.log("Menor de edad");
+}`,
+    },
+    options: [
+      { id: "a", label: "Cambiar edad > 18 por edad >= 18" },
+      { id: "b", label: "Cambiar edad > 18 por edad < 18" },
+      { id: "c", label: "Eliminar el bloque else" },
+      { id: "d", label: "Cambiar const por let" },
+    ],
+    correctId: "a",
+    explanation: "> excluye el valor 18. >= incluye el límite y representa correctamente la regla.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Anidación · 6 de 17",
+    title: "Anida solo cuando una decisión depende de otra",
+    description:
+      "Un if anidado es útil cuando la segunda pregunta solo tiene sentido después de cumplir la primera.",
+    code: {
+      label: "JavaScript",
+      content: `const sesionActiva = true;
+const saldo = 900;
+const total = 750;
+
+if (sesionActiva) {
+  if (saldo >= total) {
+    console.log("Compra autorizada");
+  } else {
+    console.log("Saldo insuficiente");
+  }
+} else {
+  console.log("Inicia sesión");
+}`,
+    },
+    notes: [
+      "El saldo solo se evalúa cuando existe una sesión activa.",
+      "Si ambas reglas fueran inseparables y hubiera una sola acción, podrían combinarse con &&.",
+    ],
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Cláusulas de guarda · 7 de 17",
+    title: "Resuelve primero los casos inválidos",
+    description:
+      "Una cláusula de guarda termina pronto una función cuando falta un requisito. Así el camino principal queda visible y se reduce la anidación.",
+    code: {
+      label: "JavaScript",
+      content: `function calcularEnvio(total, direccion) {
+  if (!direccion) {
+    return "Falta la dirección";
+  }
+
+  if (total <= 0) {
+    return "El carrito está vacío";
+  }
+
+  return total >= 800 ? "Envío gratis" : "Envío: $99";
+}`,
+    },
+    notes: [
+      "return evita que la función continúe después de detectar un caso inválido.",
+      "El último return describe el flujo exitoso sin envolverlo en otro else.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 8 de 17",
+    question: "¿Qué devuelve calcularAcceso(false, true)?",
+    code: {
+      label: "JavaScript",
+      content: `function calcularAcceso(sesionActiva, cuentaBloqueada) {
+  if (!sesionActiva) {
+    return "Inicia sesión";
+  }
+
+  if (cuentaBloqueada) {
+    return "Cuenta bloqueada";
+  }
+
+  return "Acceso permitido";
+}`,
+    },
+    options: [
+      { id: "a", label: '"Inicia sesión"' },
+      { id: "b", label: '"Cuenta bloqueada"' },
+      { id: "c", label: '"Acceso permitido"' },
+      { id: "d", label: "undefined" },
+    ],
+    correctId: "a",
+    explanation:
+      "!sesionActiva es true, así que el primer return termina la función. cuentaBloqueada ya no se evalúa.",
+  },
+  {
+    kind: "theory",
+    eyebrow: "Valores booleanos · 9 de 17",
+    title: "Una condición también interpreta valores",
+    description:
+      "JavaScript convierte ciertos valores a false dentro de una condición. Entenderlo ayuda a leer código real, aunque una comparación explícita puede comunicar mejor la intención.",
+    table: {
+      headers: ["Se interpreta como false", "Se interpreta como true"],
+      rows: [
+        ['false, 0, ""', "números distintos de 0"],
+        ["null, undefined, NaN", "texto no vacío"],
+        ["—", "arreglos y objetos, incluso vacíos"],
+      ],
+    },
+    callouts: [
+      {
+        icon: "Lightbulb",
+        title: "Cuidado con los arreglos",
+        description:
+          "[] se interpreta como true. Para saber si contiene elementos, usa arreglo.length > 0.",
+      },
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 10 de 17",
+    question: "¿Qué mensaje muestra este código?",
+    code: {
+      label: "JavaScript",
+      content: `const tareas = [];
+
+if (tareas.length) {
+  console.log("Hay tareas");
+} else {
+  console.log("Sin tareas");
+}`,
+    },
+    options: [
+      { id: "a", label: '"Hay tareas"' },
+      { id: "b", label: '"Sin tareas"' },
+      { id: "c", label: "No muestra nada" },
+      { id: "d", label: "Produce un error" },
+    ],
+    correctId: "b",
+    explanation:
+      "tareas.length vale 0 y 0 se interpreta como false, por lo que se ejecuta el bloque else.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Operador ternario · 11 de 17",
+    title: "Elige un valor con una condición breve",
+    description:
+      "El ternario condición ? valorSiEsTrue : valorSiEsFalse funciona bien para asignaciones cortas con dos resultados.",
+    code: {
+      label: "JavaScript",
+      content: `const puntos = 82;
+const estado = puntos >= 70 ? "Aprobado" : "Requiere práctica";
+
+console.log(estado); // "Aprobado"`,
+    },
+    notes: [
+      "El ternario produce un valor; por eso encaja bien en una asignación.",
+      "Si necesitas varias instrucciones o ternarios anidados, usa if...else para conservar la legibilidad.",
+    ],
+  },
+  {
+    kind: "quiz",
+    eyebrow: "Interpretación · 12 de 17",
+    question: "¿Cuál es el valor final de etiqueta?",
+    code: {
+      label: "JavaScript",
+      content: `const stock = 0;
+const etiqueta = stock > 0 ? "Disponible" : "Agotado";`,
+    },
+    options: [
+      { id: "a", label: '"Disponible"' },
+      { id: "b", label: '"Agotado"' },
+      { id: "c", label: "false" },
+      { id: "d", label: "0" },
+    ],
+    correctId: "b",
+    explanation:
+      "stock > 0 es false, así que el ternario elige el valor situado después de los dos puntos.",
+  },
+  {
+    kind: "codeExample",
+    eyebrow: "Switch avanzado · 13 de 17",
+    title: "Agrupa casos que comparten resultado",
+    description:
+      "Varios case pueden compartir el mismo bloque. Al omitir break entre ellos, el flujo avanza hasta la implementación común.",
+    code: {
+      label: "JavaScript",
+      content: `const dia = "domingo";
+let tipoDeDia;
+
+switch (dia) {
+  case "sábado":
+  case "domingo":
+    tipoDeDia = "Fin de semana";
+    break;
+  default:
+    tipoDeDia = "Día laboral";
+}`,
+    },
+    notes: [
+      "sábado y domingo llegan a la misma asignación de forma intencional.",
+      "default conserva una salida segura para cualquier valor no contemplado.",
+    ],
+  },
+  {
+    kind: "choiceSet",
+    eyebrow: "Práctica guiada · 14 de 17",
+    title: "Elige la solución más clara",
+    instructions:
+      "Selecciona el patrón que mejor expresa cada necesidad. Después comprueba tus respuestas.",
+    questions: [
+      {
+        id: "invalid-input",
+        question: "Una función debe detenerse de inmediato si falta el correo.",
+        options: [
+          { id: "guard", label: "Una cláusula de guarda con return" },
+          { id: "nested", label: "Tres if anidados" },
+          { id: "switch", label: "Un switch sin default" },
+        ],
+        correctId: "guard",
+        explanation: "La cláusula de guarda resuelve el dato inválido y termina la función.",
+      },
+      {
+        id: "short-value",
+        question: 'Debes asignar "Activo" o "Inactivo" a una sola variable.',
+        options: [
+          { id: "ternary", label: "Un operador ternario breve" },
+          { id: "nested", label: "Dos if anidados" },
+          { id: "loop", label: "Un ciclo for" },
+        ],
+        correctId: "ternary",
+        explanation: "El ternario es apropiado para elegir entre dos valores simples.",
+      },
+      {
+        id: "dependent-rule",
+        question: "Solo debes revisar el saldo después de confirmar que existe una sesión.",
+        options: [
+          { id: "nested", label: "Una condición dependiente dentro de otra" },
+          { id: "ternary", label: "Tres ternarios encadenados" },
+          { id: "unrelated", label: "Dos if sin relación" },
+        ],
+        correctId: "nested",
+        explanation: "La anidación comunica que la segunda decisión depende de la primera.",
+      },
+      {
+        id: "weekend",
+        question: "Sábado y domingo deben producir exactamente el mismo resultado.",
+        options: [
+          { id: "grouped", label: "Casos agrupados en switch" },
+          { id: "duplicate", label: "Duplicar el mismo bloque dos veces" },
+          { id: "guard", label: "Una guarda sin condición" },
+        ],
+        correctId: "grouped",
+        explanation: "Agrupar case evita duplicar la implementación compartida.",
+      },
+    ],
+    explanation:
+      "La mejor estructura no solo funciona: también hace evidente la regla y reduce código repetido.",
+  },
+  {
+    kind: "blockPuzzle",
+    eyebrow: "Actividad aplicada · 15 de 17",
+    title: "Construye una decisión robusta",
+    instructions:
+      "Ordena los bloques para validar una compra y devolver el mensaje correcto sin anidación innecesaria.",
+    blocks: [
+      { id: "function", text: "function evaluarCompra(total, saldo) {" },
+      { id: "invalid", text: 'if (total <= 0) return "Total inválido";' },
+      { id: "funds", text: 'if (saldo < total) return "Saldo insuficiente";' },
+      {
+        id: "success",
+        text: 'return total >= 800 ? "Compra con envío gratis" : "Compra autorizada";',
+      },
+      { id: "close", text: "}" },
+    ],
+    correctOrder: ["function", "invalid", "funds", "success", "close"],
+    explanation:
+      "Primero se descartan los casos inválidos, después se valida el saldo y al final se devuelve el resultado exitoso.",
+  },
+  {
+    kind: "recap",
+    eyebrow: "Resumen · 16 de 17",
+    title: "Condicionales confiables y legibles",
+    takeaways: [
+      "Ordena los rangos de lo específico a lo general y prueba sus límites.",
+      "Anida únicamente cuando una decisión dependa realmente de otra.",
+      "Usa cláusulas de guarda para resolver casos inválidos y reducir niveles de anidación.",
+      "Recuerda que 0 y el texto vacío son falsy, mientras que arreglos y objetos son truthy.",
+      "Reserva el ternario para elegir valores breves y agrupa los case que comparten resultado.",
+    ],
+  },
+  {
+    kind: "feedback",
+    eyebrow: "Retroalimentación · 17 de 17",
+    title: "Resultados de condicionales a profundidad",
+    message:
+      "Revisa tu puntuación y cada explicación para confirmar que puedes interpretar, depurar y construir decisiones robustas en JavaScript.",
   },
 ];
 
@@ -3915,6 +5443,21 @@ export const learningModules: LearningModule[] = [
     tone: "cyan",
     steps: tiposDatosSteps,
     evaluationMode: "graded",
+    nextSlug: "uso-tipo-dato-booleano",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "uso-tipo-dato-booleano",
+    title: "Uso del tipo de dato booleano",
+    subtitle: "Modela y actualiza estados de verdadero o falso",
+    description:
+      "Practica cómo inicializar, actualizar y consultar banderas booleanas para representar estados reales dentro de un programa.",
+    duration: "8 min",
+    level: "Inicial",
+    icon: "CircleCheck",
+    tone: "amber",
+    steps: usoBooleanosSteps,
+    evaluationMode: "graded",
     nextSlug: "operadores",
   },
   {
@@ -3930,6 +5473,66 @@ export const learningModules: LearningModule[] = [
     tone: "emerald",
     steps: operadoresSteps,
     evaluationMode: "graded",
+    nextSlug: "operadores-aritmeticos",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "operadores-aritmeticos",
+    title: "Operadores aritméticos",
+    subtitle: "Combina cálculos con precedencia y claridad",
+    description:
+      "Profundiza en la precedencia, la agrupación y el uso del residuo mediante cálculos prácticos en JavaScript.",
+    duration: "9 min",
+    level: "Inicial",
+    icon: "Calculator",
+    tone: "cyan",
+    steps: operadoresAritmeticosSteps,
+    evaluationMode: "graded",
+    nextSlug: "operadores-asignacion",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "operadores-asignacion",
+    title: "Operadores de asignación",
+    subtitle: "Actualiza contadores, saldos e inventarios",
+    description:
+      "Practica asignaciones simples y compuestas para seguir cambios de estado de forma clara en JavaScript.",
+    duration: "9 min",
+    level: "Inicial",
+    icon: "RefreshCw",
+    tone: "violet",
+    steps: operadoresAsignacionSteps,
+    evaluationMode: "graded",
+    nextSlug: "operadores-comparacion",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "operadores-comparacion",
+    title: "Operadores de comparación",
+    subtitle: "Traduce requisitos a respuestas booleanas",
+    description:
+      "Compara valores y tipos, interpreta límites y convierte reglas concretas en expresiones booleanas de JavaScript.",
+    duration: "9 min",
+    level: "Inicial",
+    icon: "Scale",
+    tone: "amber",
+    steps: operadoresComparacionSteps,
+    evaluationMode: "graded",
+    nextSlug: "operadores-logicos",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "operadores-logicos",
+    title: "Operadores lógicos",
+    subtitle: "Construye reglas con AND, OR y NOT",
+    description:
+      "Combina y niega condiciones, interpreta tablas de verdad y agrupa reglas de negocio legibles en JavaScript.",
+    duration: "9 min",
+    level: "Inicial",
+    icon: "Workflow",
+    tone: "rose",
+    steps: operadoresLogicosSteps,
+    evaluationMode: "graded",
     nextSlug: "estructuras-control-condicionales",
   },
   {
@@ -3944,6 +5547,21 @@ export const learningModules: LearningModule[] = [
     icon: "GitBranch",
     tone: "amber",
     steps: estructurasCondicionalesSteps,
+    evaluationMode: "graded",
+    nextSlug: "condicionales-a-profundidad",
+  },
+  {
+    courseId: "fundamentos-programacion",
+    slug: "condicionales-a-profundidad",
+    title: "Condicionales a profundidad",
+    subtitle: "Diseña decisiones robustas, claras y sin casos límite olvidados",
+    description:
+      "Profundiza en rangos, anidación, cláusulas de guarda, valores truthy y falsy, ternarios y casos agrupados con ejercicios prácticos en JavaScript.",
+    duration: "12 min",
+    level: "Intermedio",
+    icon: "GitBranch",
+    tone: "cyan",
+    steps: condicionalesProfundidadSteps,
     evaluationMode: "graded",
     nextSlug: "estructuras-control-bucles",
   },
