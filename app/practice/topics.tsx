@@ -17,8 +17,14 @@ export default function FlashcardTopicsScreen() {
           <Pressable
             onPress={() =>
               router.push({
-                pathname: "/practice/session",
-                params: { topic: item.slug },
+                pathname: "/practice/completion",
+                params: {
+                  topic: item.slug,
+                  phase: "start",
+                  known: "0",
+                  inProgress: "0",
+                  total: "0",
+                },
               })
             }
             className="rounded-[28px] border border-border bg-card px-5 py-5 shadow-sm shadow-foreground/10 active:opacity-90"

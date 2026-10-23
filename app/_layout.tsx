@@ -195,7 +195,7 @@ function RootContent() {
           <Stack.Screen
             name="practice/completion"
             options={{
-              title: "Finalización",
+              title: "Resumen de tarjetas",
               headerRight: () => <ThemeToggle />,
             }}
           />
