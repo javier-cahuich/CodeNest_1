@@ -15,7 +15,7 @@ function parseCount(value: string | string[] | undefined) {
 const summaryCards = [
   {
     key: "known",
-    label: "Conocido",
+    label: "Conocidos",
     description: "Conceptos que ya reconoces con seguridad.",
     icon: "Check",
     toneClassName: "border-success bg-success/10",
@@ -37,13 +37,15 @@ export default function FlashcardCompletionScreen() {
     known?: string;
     inProgress?: string;
     total?: string;
+    phase?: string;
   }>();
   const topic = params.topic ? getFlashcardTopic(params.topic) : undefined;
   const knownCount = parseCount(params.known);
   const inProgressCount = parseCount(params.inProgress);
   const totalCount = parseCount(params.total);
+  const isStartingSession = params.phase === "start";
 
-  const handleRestart = () => {
+  const handleStart = () => {
     if (!topic) {
       router.replace("/practice/topics");
       return;
@@ -63,8 +65,9 @@ export default function FlashcardCompletionScreen() {
         </View>
         <Text className="mt-5 text-h1 text-center text-foreground">Resumen de tarjetas</Text>
         <Text className="mt-3 text-body text-center leading-7 text-muted-foreground">
-          Terminaste la sesión{topic ? ` de ${topic.title}` : ""}. Revisa cómo clasificaste los
-          conceptos antes de salir de la actividad.
+          {isStartingSession
+            ? `Antes de comenzar${topic ? ` con ${topic.title}` : ""}, tus resultados partirán de cero. Inicia cuando estés listo para practicar.`
+            : `Terminaste la sesión${topic ? ` de ${topic.title}` : ""}. Revisa cómo clasificaste los conceptos antes de salir de la actividad.`}
         </Text>
       </View>
 
@@ -98,20 +101,23 @@ export default function FlashcardCompletionScreen() {
           <Text className="text-h2 text-card-foreground">{totalCount}</Text>
         </View>
         <Text className="mt-2 text-body leading-6 text-muted-foreground">
-          Tus clasificaciones se conservarán en este resumen hasta que decidas salir o reiniciar la
-          ronda.
+          {isStartingSession
+            ? "Los términos se sumarán aquí conforme los clasifiques durante la sesión."
+            : "Tus clasificaciones se conservarán en este resumen hasta que decidas salir o iniciar una nueva ronda."}
         </Text>
       </View>
 
       <View className="gap-3">
         <Button variant="secondary" className="h-12 rounded-2xl" disabled>
-          <Text className="text-button text-secondary-foreground">Seguir repasando términos</Text>
+          <Text className="text-button text-secondary-foreground">
+            Repasar términos en progreso
+          </Text>
         </Button>
-        <Button variant="outline" className="h-12 rounded-2xl" onPress={handleRestart}>
-          <Text className="text-button text-foreground">Reiniciar tarjetas</Text>
+        <Button variant="outline" className="h-12 rounded-2xl" onPress={handleStart}>
+          <Text className="text-button text-foreground">Iniciar tarjetas</Text>
         </Button>
         <Button className="h-12 rounded-2xl" onPress={() => router.replace("/practice/topics")}>
-          <Text className="text-button text-primary-foreground">Terminar</Text>
+          <Text className="text-button text-primary-foreground">Salir</Text>
         </Button>
       </View>
     </Screen>
