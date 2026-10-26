@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { supabase } from "@/lib/supabase";
 import { useLessonProgressStore } from "@/stores/lesson-progress-store";
 import { useFlashcardSessionStore } from "@/stores/flashcard-session-store";
+import { useQuizSessionStore } from "@/stores/quiz-session-store";
 import { queryClient } from "@/lib/query-client";
 
 type AuthStatus = "loading" | "anonymous" | "authenticated";
@@ -92,6 +93,7 @@ function resetFlashcardsForUser(userId: string | null) {
   // Cancels in-flight reads as well as removing the previous account's cached data.
   queryClient.clear();
   useFlashcardSessionStore.getState().clearRound();
+  useQuizSessionStore.getState().clearRound();
 }
 
 export const useAuthStore = create<AuthState>((set) => ({

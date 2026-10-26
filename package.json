@@ -12,6 +12,7 @@
     "format": "yarn lint --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "typecheck": "tsc --noEmit",
     "test:flashcards": "tsx --test tests/flashcards.test.ts",
+    "test:quizzes": "tsx --test tests/quizzes.test.ts",
     "web": "expo start --web",
     "update-dependencies": "npx expo install --fix"
   },

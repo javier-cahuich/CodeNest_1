@@ -1,0 +1,103 @@
+import type { QuizQuestion } from "@/data/quizzes/types";
+
+export const basicConceptQuestions = [
+  {
+    id: "fp-basic-algorithm-definition",
+    sourceLessonSlug: "que-es-un-algoritmo",
+    prompt: "¿Qué describe mejor un algoritmo?",
+    options: [
+      "Una secuencia ordenada y finita de pasos para resolver un problema",
+      "Un lenguaje de programación exclusivo para computadoras",
+      "Una colección de datos guardados sin ningún orden",
+      "Un dibujo que siempre debe contener código",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-basic-algorithm-input-process-output",
+    sourceLessonSlug: "que-es-un-algoritmo",
+    prompt: "En un algoritmo para calcular un promedio, ¿cuál es la salida?",
+    options: [
+      "Las calificaciones que se capturan",
+      "La suma intermedia de las calificaciones",
+      "El promedio calculado",
+      "La instrucción para dividir",
+    ],
+    correctOptionIndex: 2,
+  },
+  {
+    id: "fp-basic-flowchart-decision-symbol",
+    sourceLessonSlug: "representacion-algoritmos-diagramas-flujo",
+    prompt: "¿Qué figura representa una decisión en un diagrama de flujo?",
+    options: ["Óvalo", "Rombo", "Rectángulo", "Paralelogramo"],
+    correctOptionIndex: 1,
+  },
+  {
+    id: "fp-basic-flowchart-input-output-symbol",
+    sourceLessonSlug: "representacion-algoritmos-diagramas-flujo",
+    prompt: "¿Qué símbolo se utiliza normalmente para una entrada o salida de datos?",
+    options: ["Paralelogramo", "Círculo", "Rombo", "Rectángulo"],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-basic-pseudocode-boundaries",
+    sourceLessonSlug: "representacion-algoritmos-pseudocodigo",
+    prompt: "¿Qué palabras delimitan la estructura principal de un pseudocódigo?",
+    options: ["Abrir y Cerrar", "Inicio y Fin", "Entrada y Salida", "Si y Sino"],
+    correctOptionIndex: 1,
+  },
+  {
+    id: "fp-basic-pseudocode-assignment",
+    sourceLessonSlug: "representacion-algoritmos-pseudocodigo",
+    prompt: "¿Qué instrucción asigna correctamente la suma de dos notas a `promedio`?",
+    codeLabel: "Pseudocódigo",
+    code: "nota1 <- 80\nnota2 <- 90",
+    options: [
+      "promedio <- (nota1 + nota2) / 2",
+      "Leer promedio, nota1, nota2",
+      "Escribir nota1 + nota2 / promedio",
+      "promedio = nota1 <- nota2",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-basic-pseudocode-condition-result",
+    sourceLessonSlug: "representacion-algoritmos-pseudocodigo",
+    prompt: "¿Qué mensaje muestra el algoritmo cuando `numero` vale -3?",
+    codeLabel: "Pseudocódigo",
+    code: 'Si numero > 0 Entonces\n  Escribir "Positivo"\nSino\n  Escribir "No positivo"\nFinSi',
+    options: ["Positivo", "No positivo", "-3", "No muestra nada"],
+    correctOptionIndex: 1,
+  },
+  {
+    id: "fp-basic-program-algorithm-difference",
+    sourceLessonSlug: "estructura-de-un-programa",
+    prompt: "¿Cuál es la diferencia principal entre un algoritmo y un programa?",
+    options: [
+      "El algoritmo describe la solución y el programa la implementa en un lenguaje",
+      "El programa no contiene instrucciones",
+      "El algoritmo solo funciona dentro de una computadora",
+      "No existe ninguna diferencia entre ambos",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-basic-program-main-body",
+    sourceLessonSlug: "estructura-de-un-programa",
+    prompt: "¿En qué parte de un programa se coordina normalmente la ejecución principal?",
+    options: ["En las librerías", "En el cuerpo principal", "En los comentarios", "En el nombre del archivo"],
+    correctOptionIndex: 1,
+  },
+  {
+    id: "fp-basic-program-comments-purpose",
+    sourceLessonSlug: "estructura-de-un-programa",
+    prompt: "¿Para qué sirven los comentarios dentro del código?",
+    options: [
+      "Para explicar decisiones o partes importantes sin ejecutarse",
+      "Para reemplazar todas las instrucciones",
+      "Para declarar datos obligatoriamente",
+      "Para hacer que el programa siempre sea más rápido",
+    ],
+    correctOptionIndex: 0,
+  },
+] satisfies QuizQuestion[];

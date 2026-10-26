@@ -1,0 +1,113 @@
+import type { QuizQuestion } from "@/data/quizzes/types";
+
+export const variableTypeQuestions = [
+  {
+    id: "fp-variables-variable-versus-constant",
+    sourceLessonSlug: "variables-y-constantes",
+    prompt: "¿Qué dato conviene representar como constante?",
+    options: [
+      "El puntaje que aumenta durante una partida",
+      "El saldo que cambia con cada compra",
+      "El porcentaje fijo de IVA usado por el algoritmo",
+      "La cantidad actual de productos",
+    ],
+    correctOptionIndex: 2,
+  },
+  {
+    id: "fp-variables-camel-case-name",
+    sourceLessonSlug: "variables-y-constantes",
+    prompt: "¿Qué nombre sigue camelCase y comunica claramente su propósito?",
+    options: ["total_de_compra", "Total Compra", "totalCompra", "1totalCompra"],
+    correctOptionIndex: 2,
+  },
+  {
+    id: "fp-variables-trace-current-value",
+    sourceLessonSlug: "uso-de-variables-y-constantes",
+    prompt: "¿Cuál es el valor final de `ahorro`?",
+    codeLabel: "Pseudocódigo",
+    code: "ahorro <- 100\nahorro <- ahorro + 40\nahorro <- ahorro - 15",
+    options: ["85", "100", "125", "155"],
+    correctOptionIndex: 2,
+  },
+  {
+    id: "fp-variables-initialize-before-use",
+    sourceLessonSlug: "uso-de-variables-y-constantes",
+    prompt: "¿Por qué se debe inicializar una variable antes de usarla en un cálculo?",
+    options: [
+      "Para que tenga un valor inicial conocido",
+      "Para convertirla automáticamente en constante",
+      "Para evitar asignarle un nombre",
+      "Para impedir que vuelva a consultarse",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-variables-avoid-magic-numbers",
+    sourceLessonSlug: "uso-de-variables-y-constantes",
+    prompt: "¿Qué mejora evita repetir un número mágico como `0.16` en varios cálculos?",
+    options: [
+      "Guardar el valor en una constante con un nombre como `TASA_IVA`",
+      "Escribir el número más veces",
+      "Cambiarlo por una cadena de texto",
+      "Eliminar el cálculo",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-types-decimal-value",
+    sourceLessonSlug: "tipos-de-datos",
+    prompt: "¿Qué tipo de dato representa mejor el precio `149.50`?",
+    options: ["Entero", "Decimal", "Cadena de texto", "Booleano"],
+    correctOptionIndex: 1,
+  },
+  {
+    id: "fp-types-profile-fields",
+    sourceLessonSlug: "tipos-de-datos",
+    prompt: "¿Qué combinación de tipos corresponde a nombre, edad y cuenta activa?",
+    options: [
+      "Cadena, entero y booleano",
+      "Entero, cadena y decimal",
+      "Booleano, decimal y cadena",
+      "Cadena, booleano y entero",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-booleans-real-state",
+    sourceLessonSlug: "uso-tipo-dato-booleano",
+    prompt: "¿Qué situación se modela mejor con un booleano?",
+    options: [
+      "El nombre completo de un usuario",
+      "El precio de un producto",
+      "Si un correo ya fue verificado",
+      "La lista de materias inscritas",
+    ],
+    correctOptionIndex: 2,
+  },
+  {
+    id: "fp-booleans-event-update",
+    sourceLessonSlug: "uso-tipo-dato-booleano",
+    prompt: "¿Qué debe ocurrir con `correoVerificado` después de confirmar correctamente el correo?",
+    codeLabel: "Estado inicial",
+    code: "correoVerificado <- Falso",
+    options: [
+      "Debe cambiar a Verdadero",
+      "Debe convertirse en el texto \"Verdadero\"",
+      "Debe conservar siempre Falso",
+      "Debe cambiar a un número",
+    ],
+    correctOptionIndex: 0,
+  },
+  {
+    id: "fp-booleans-direct-condition",
+    sourceLessonSlug: "uso-tipo-dato-booleano",
+    prompt: "Si `tieneAcceso` ya es booleano, ¿cuál condición es más directa?",
+    options: [
+      "Si tieneAcceso Entonces",
+      "Si tieneAcceso = \"sí\" Entonces",
+      "Si tieneAcceso + 1 Entonces",
+      "Si cadena(tieneAcceso) Entonces",
+    ],
+    correctOptionIndex: 0,
+  },
+] satisfies QuizQuestion[];

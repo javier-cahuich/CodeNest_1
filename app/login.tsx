@@ -1,4 +1,4 @@
-import { Redirect, router, useLocalSearchParams } from "expo-router";
+import { Redirect, router, useLocalSearchParams, type Href } from "expo-router";
 import * as React from "react";
 import { View } from "react-native";
 import { Screen } from "@/components/layout/screen";
@@ -9,14 +9,25 @@ import LucideIcon from "@/lib/icons/LucideIcon";
 import { useAuthStore } from "@/stores/auth-store";
 import { getFlashcardTopic } from "@/data/flashcard-decks";
 import { flashcardTopicsHref, resolveFlashcardHref } from "@/lib/flashcards";
+import { getQuizTopicSession } from "@/data/quiz-topics";
+import { quizStartHref } from "@/lib/quizzes";
 
 export default function LoginScreen() {
-  const params = useLocalSearchParams<{ flashcardTopic?: string; reauthenticate?: string }>();
+  const params = useLocalSearchParams<{
+    flashcardTopic?: string;
+    quizTopic?: string;
+    reauthenticate?: string;
+  }>();
   const flashcardTopic = getFlashcardTopic(params.flashcardTopic ?? "");
+  const quizTopic = getQuizTopicSession(params.quizTopic ?? "");
   const isFlashcardLogin = Boolean(params.flashcardTopic);
-  const destination = isFlashcardLogin
+  const isQuizLogin = Boolean(params.quizTopic);
+  const isPracticeLogin = isFlashcardLogin || isQuizLogin;
+  const destination: Href = isFlashcardLogin
     ? resolveFlashcardHref(params.flashcardTopic!)
-    : "/(tabs)/profile";
+    : quizTopic
+      ? quizStartHref(quizTopic.topicSlug)
+      : "/(tabs)/profile";
   const status = useAuthStore((state) => state.status);
   const authError = useAuthStore((state) => state.authError);
   const signInWithEmail = useAuthStore((state) => state.signInWithEmail);
@@ -56,10 +67,12 @@ export default function LoginScreen() {
           <View className="flex-1">
             <Text className="text-h2 text-card-foreground">Iniciar sesión</Text>
             <Text className="mt-2 text-body leading-6 text-muted-foreground">
-              {isFlashcardLogin
+              {isPracticeLogin
                 ? params.reauthenticate === "1"
                   ? "Inicia sesión nuevamente para continuar. Tus respuestas guardadas se conservan."
-                  : `Inicia sesión para practicar ${flashcardTopic?.title ?? "tus tarjetas"} y recuperar tus términos en progreso.`
+                  : isQuizLogin
+                    ? `Inicia sesión para practicar ${quizTopic?.topicTitle ?? "este cuestionario"} y recuperar tus preguntas erradas.`
+                    : `Inicia sesión para practicar ${flashcardTopic?.title ?? "tus tarjetas"} y recuperar tus términos en progreso.`
                 : "Accede con tu cuenta de Supabase para ver tu correo y mantener la sesión activa."}
             </Text>
           </View>
@@ -115,13 +128,21 @@ export default function LoginScreen() {
           className="mt-3 h-12 rounded-2xl"
           disabled={isSubmitting}
           onPress={() =>
-            isFlashcardLogin
-              ? router.replace(flashcardTopicsHref(flashcardTopic?.courseId))
+            isPracticeLogin
+              ? router.replace(
+                  isQuizLogin
+                    ? "/practice/quiz-topics"
+                    : flashcardTopicsHref(flashcardTopic?.courseId),
+                )
               : router.back()
           }
         >
           <Text className="text-button text-foreground">
-            {isFlashcardLogin ? "Volver a mazos" : "Volver a Perfil"}
+            {isQuizLogin
+              ? "Volver a cuestionarios"
+              : isFlashcardLogin
+                ? "Volver a mazos"
+                : "Volver a Perfil"}
           </Text>
         </Button>
 

@@ -13,10 +13,14 @@ export function FlashcardNotice({
   title,
   message,
   onRetry,
+  backHref = "/practice/topics",
+  backLabel = "Volver a mazos",
 }: {
   title: string;
   message: string;
   onRetry?: () => void;
+  backHref?: "/practice/topics" | "/practice/quiz-topics";
+  backLabel?: string;
 }) {
   return (
     <SafeAreaView className="flex-1 bg-background">
@@ -33,8 +37,8 @@ export function FlashcardNotice({
             <Text>Reintentar</Text>
           </Button>
         ) : null}
-        <Button variant="outline" onPress={() => router.replace("/practice/topics")}>
-          <Text>Volver a mazos</Text>
+        <Button variant="outline" onPress={() => router.replace(backHref)}>
+          <Text>{backLabel}</Text>
         </Button>
       </View>
     </SafeAreaView>

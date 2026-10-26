@@ -1,16 +1,27 @@
-import { router, useLocalSearchParams } from "expo-router";
+import * as React from "react";
+import { Redirect, router, Stack, useLocalSearchParams } from "expo-router";
 import { View } from "react-native";
+import { QuizAccess } from "@/components/codenest/quiz-access";
 import { Screen } from "@/components/layout/screen";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { getQuizTopicSession } from "@/data/quiz-topics";
 import LucideIcon from "@/lib/icons/LucideIcon";
-
-function parseCount(value: string | string[] | undefined) {
-  const rawValue = Array.isArray(value) ? value[0] : value;
-  const parsedValue = Number.parseInt(rawValue ?? "0", 10);
-  return Number.isNaN(parsedValue) ? 0 : parsedValue;
-}
+import { QuizAuthError } from "@/lib/quiz-progress";
+import {
+  getQuizRoundQuestionIds,
+  quizLoginHref,
+  summarizeSavedQuizProgress,
+  summarizeQuizStatuses,
+  type QuizMode,
+  type QuizProgress,
+} from "@/lib/quizzes";
+import { useQuizProgress } from "@/lib/use-quiz-progress";
+import {
+  isCurrentQuizRound,
+  useQuizSessionStore,
+  type QuizRound,
+} from "@/stores/quiz-session-store";
 
 const resultCards = [
   { key: "correct", label: "Aciertos", icon: "Check", tone: "success" },
@@ -18,49 +29,103 @@ const resultCards = [
   { key: "omitted", label: "Omisiones", icon: "Minus", tone: "secondary" },
 ] as const;
 
-export default function QuizResultsScreen() {
-  const params = useLocalSearchParams<{
-    topic?: string;
-    correct?: string;
-    incorrect?: string;
-    omitted?: string;
-  }>();
+function getCompletedRound(
+  round: QuizRound | null,
+  input: { phase?: string; roundId?: string; userId: string; topicSlug: string },
+) {
+  if (!round || input.phase === "start") return null;
+  if (round.id !== input.roundId || round.userId !== input.userId) return null;
+  if (round.topicSlug !== input.topicSlug || !isCurrentQuizRound(round)) return null;
+  if (Object.keys(round.answers).length !== round.questionIds.length) return null;
+  return round;
+}
 
-  const topic = params.topic ? getQuizTopicSession(params.topic) : undefined;
-  const correctCount = parseCount(params.correct);
-  const incorrectCount = parseCount(params.incorrect);
-  const omittedCount = parseCount(params.omitted);
+export default function QuizResultsScreen() {
+  const params = useLocalSearchParams<{ topic?: string; phase?: string; round?: string }>();
+  const topicSlug = params.topic ?? "";
+
+  return (
+    <QuizAccess topicSlug={topicSlug}>
+      {(userId) => (
+        <QuizFeedback
+          key={`${userId}:${topicSlug}:${params.phase}:${params.round}`}
+          userId={userId}
+          topicSlug={topicSlug}
+          phase={params.phase}
+          roundId={params.round}
+        />
+      )}
+    </QuizAccess>
+  );
+}
+
+function QuizFeedback({
+  userId,
+  topicSlug,
+  phase,
+  roundId,
+}: {
+  userId: string;
+  topicSlug: string;
+  phase?: string;
+  roundId?: string;
+}) {
+  const topic = getQuizTopicSession(topicSlug)!;
+  const query = useQuizProgress(userId, topicSlug);
+  const round = useQuizSessionStore((state) => state.round);
+  const starting = React.useRef(false);
+  const completedRound = getCompletedRound(round, { phase, roundId, userId, topicSlug });
+  const isStartingSession = !completedRound;
+  const roundStatuses = Object.fromEntries(
+    Object.entries(completedRound?.answers ?? {}).map(([questionId, answer]) => [
+      questionId,
+      answer.status,
+    ]),
+  ) as QuizProgress;
+  const savedSummary = summarizeSavedQuizProgress(
+    query.data ?? {},
+    topic.questions.length,
+  );
+  const summary = completedRound ? summarizeQuizStatuses(roundStatuses) : savedSummary;
+  const incorrectIds = getQuizRoundQuestionIds(topicSlug, "incorrect", query.data ?? {});
+  const progressReady = query.isSuccess && !query.isFetching;
+
+  const startRound = (mode: QuizMode) => {
+    if (!progressReady || starting.current) return;
+    const questionIds = getQuizRoundQuestionIds(topicSlug, mode, query.data ?? {});
+    const id = useQuizSessionStore.getState().startRound({
+      userId,
+      topicSlug,
+      mode,
+      questionIds,
+    });
+    if (!id) return;
+    starting.current = true;
+    router.replace({
+      pathname: "/practice/quiz-session",
+      params: { topic: topicSlug, round: id },
+    });
+  };
+
+  if (query.error instanceof QuizAuthError) {
+    return <Redirect href={quizLoginHref(topicSlug, true)} />;
+  }
 
   return (
     <Screen scroll contentClassName="flex-1 justify-center gap-5">
-      <View className="items-center rounded-[32px] border border-border bg-card px-5 py-8">
-        <View className="h-16 w-16 items-center justify-center rounded-[24px] bg-primary/10">
-          <LucideIcon name="FileCheck" size={28} className="text-primary" />
-        </View>
-        <Text className="mt-5 text-h1 text-center text-foreground">Resultados de Cuestionario</Text>
-        <Text className="mt-3 text-body text-center leading-7 text-muted-foreground">
-          {topic
-            ? `Terminaste el tema ${topic.topicTitle}. Aquí tienes el resumen final de tu sesión.`
-            : "Aquí tienes el resumen final de tu sesión de cuestionario."}
-        </Text>
-      </View>
+      <Stack.Screen
+        options={{ title: isStartingSession ? "Preparar cuestionario" : "Resultados" }}
+      />
 
       <View className="gap-3">
         {resultCards.map((card) => {
-          const value =
-            card.key === "correct"
-              ? correctCount
-              : card.key === "incorrect"
-                ? incorrectCount
-                : omittedCount;
-
+          const value = summary[card.key];
           const toneClassName =
             card.tone === "success"
               ? "bg-success/10 border-success"
               : card.tone === "destructive"
                 ? "bg-destructive/10 border-destructive"
                 : "bg-secondary border-border";
-
           const iconClassName =
             card.tone === "success"
               ? "text-success"
@@ -80,10 +145,16 @@ export default function QuizResultsScreen() {
                 <Text className="text-h4 text-foreground">{card.label}</Text>
                 <Text className="mt-1 text-body text-muted-foreground">
                   {card.key === "correct"
-                    ? "Respuestas marcadas correctamente."
+                    ? isStartingSession
+                      ? "Respuestas correctas guardadas."
+                      : "Respuestas correctas de esta ronda."
                     : card.key === "incorrect"
-                      ? "Respuestas seleccionadas con error."
-                      : "Preguntas que quedaron sin responder."}
+                      ? isStartingSession
+                        ? "Respuestas incorrectas pendientes de repaso."
+                        : "Respuestas incorrectas de esta ronda."
+                      : isStartingSession
+                        ? "Preguntas sin responder desde que comenzaste."
+                        : "Preguntas sin responder de esta ronda."}
                 </Text>
               </View>
               <Text className="text-h2 text-foreground">{value}</Text>
@@ -92,9 +163,31 @@ export default function QuizResultsScreen() {
         })}
       </View>
 
-      <Button className="h-12 rounded-2xl" onPress={() => router.replace("/practice/quiz-topics")}>
-        <Text className="text-button text-primary-foreground">Continuar</Text>
-      </Button>
+      <View className="gap-3">
+        <Button
+          className="h-12 rounded-2xl"
+          disabled={!progressReady}
+          onPress={() => startRound("all")}
+        >
+          <Text className="text-button text-primary-foreground">Iniciar</Text>
+        </Button>
+        <Button
+          variant="secondary"
+          className="h-12 rounded-2xl"
+          disabled={!progressReady || incorrectIds.length === 0}
+          accessibilityState={{ disabled: !progressReady || incorrectIds.length === 0 }}
+          onPress={() => startRound("incorrect")}
+        >
+          <Text className="text-button text-secondary-foreground">Repasar errores</Text>
+        </Button>
+        <Button
+          variant="outline"
+          className="h-12 rounded-2xl"
+          onPress={() => router.replace("/practice/quiz-topics")}
+        >
+          <Text className="text-button text-foreground">Salir</Text>
+        </Button>
+      </View>
     </Screen>
   );
 }

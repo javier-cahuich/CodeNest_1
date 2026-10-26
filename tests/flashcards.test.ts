@@ -25,13 +25,17 @@ const variablesDeck = flashcardDeckSlug("fundamentos-programacion", "variables-a
 const jsDeck = flashcardDeckSlug("fundamentos-javascript", "lessons");
 const cards = flashcardDecks.flatMap((deck) => deck.cards);
 
-test("los cuestionarios resuelven sus ocho temas independientemente de los mazos por sección", () => {
-  assert.equal(quizTopics.length, 8);
+test("los cuestionarios y mazos comparten las seis secciones publicadas sin compartir contenido", () => {
+  assert.equal(quizTopics.length, 6);
   assert.deepEqual(
     quizTopics.map((topic) => topic.slug),
     quizTopicSessions.map((session) => session.topicSlug),
   );
-  assert.ok(quizTopicSessions.every((session) => session.questions.length === 5));
+  assert.ok(quizTopicSessions.every((session) => session.questions.length === 10));
+  assert.deepEqual(
+    quizTopics.map((topic) => topic.slug),
+    flashcardDecks.map((deck) => deck.slug),
+  );
 });
 
 test("cada sección publicada tiene exactamente un mazo de 15 tarjetas y fuentes de sus propias lecciones", () => {
