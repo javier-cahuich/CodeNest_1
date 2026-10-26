@@ -29,6 +29,8 @@ import { WebPortalContext } from "@/components/WebPortalContext";
 import * as SplashScreen from "expo-splash-screen";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth-store";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/query-client";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -181,7 +183,7 @@ function RootContent() {
           <Stack.Screen
             name="practice/topics"
             options={{
-              title: "Temas de Tarjetas",
+              title: "Mazos del curso",
               headerRight: () => <ThemeToggle />,
             }}
           />
@@ -267,7 +269,9 @@ export default function RootLayout() {
       initialThemeName={isDarkColorScheme ? "dark" : "light"}
       themes={[lightTheme, darkTheme]}
     >
-      <RootContent />
+      <QueryClientProvider client={queryClient}>
+        <RootContent />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

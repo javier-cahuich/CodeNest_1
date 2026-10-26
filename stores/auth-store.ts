@@ -2,6 +2,9 @@ import { type Session, type User } from "@supabase/supabase-js";
 import { create } from "zustand";
 import { supabase } from "@/lib/supabase";
 import { useLessonProgressStore } from "@/stores/lesson-progress-store";
+import { useFlashcardSessionStore } from "@/stores/flashcard-session-store";
+import { useQuizSessionStore } from "@/stores/quiz-session-store";
+import { queryClient } from "@/lib/query-client";
 
 type AuthStatus = "loading" | "anonymous" | "authenticated";
 
@@ -71,6 +74,7 @@ function mapAuthErrorMessage(message?: string) {
 }
 
 function getAuthSnapshot(session: Session | null) {
+  resetFlashcardsForUser(session?.user.id ?? null);
   return {
     session,
     user: session?.user ?? null,
@@ -79,6 +83,17 @@ function getAuthSnapshot(session: Session | null) {
     registrationMessage: null,
     isInitialized: true,
   };
+}
+
+let flashcardUserId: string | null = null;
+
+function resetFlashcardsForUser(userId: string | null) {
+  if (flashcardUserId === userId) return;
+  flashcardUserId = userId;
+  // Cancels in-flight reads as well as removing the previous account's cached data.
+  queryClient.clear();
+  useFlashcardSessionStore.getState().clearRound();
+  useQuizSessionStore.getState().clearRound();
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -104,6 +119,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     } = await supabase.auth.getSession();
 
     if (error) {
+      resetFlashcardsForUser(null);
       useLessonProgressStore.getState().clearLessonProgress();
       set({
         status: "anonymous",
@@ -233,6 +249,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
 
     useLessonProgressStore.getState().clearLessonProgress();
+    resetFlashcardsForUser(null);
     set({
       status: "anonymous",
       session: null,
