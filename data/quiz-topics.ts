@@ -1,4 +1,46 @@
-import { flashcardTopics } from "@/data/flashcard-topics";
+// Quizzes have their own topic catalog; flashcards are grouped by course section.
+export const quizTopics = [
+  {
+    slug: "variables",
+    title: "Variables",
+    description: "Cómo guardar valores y reutilizarlos dentro de un programa.",
+  },
+  {
+    slug: "tipos-de-datos",
+    title: "Tipos de datos",
+    description: "Texto, números y booleanos para representar información básica.",
+  },
+  {
+    slug: "condicionales",
+    title: "Condicionales",
+    description: "Decisiones que cambian el flujo según una condición.",
+  },
+  {
+    slug: "bucles",
+    title: "Bucles",
+    description: "Repeticiones controladas para automatizar tareas.",
+  },
+  {
+    slug: "funciones",
+    title: "Funciones",
+    description: "Bloques reutilizables para organizar mejor la lógica.",
+  },
+  {
+    slug: "arreglos",
+    title: "Arreglos",
+    description: "Listas ordenadas para trabajar con varios elementos.",
+  },
+  {
+    slug: "objetos",
+    title: "Objetos",
+    description: "Estructuras con propiedades para describir entidades.",
+  },
+  {
+    slug: "manejo-de-errores",
+    title: "Manejo de errores",
+    description: "Formas básicas de anticipar fallos y responder correctamente.",
+  },
+];
 
 export interface QuizQuestion {
   id: string;
@@ -18,7 +60,7 @@ export interface QuizTopicSession {
 type QuizQuestionInput = Omit<QuizQuestion, "id">;
 
 function buildQuizTopic(topicSlug: string, questions: QuizQuestionInput[]): QuizTopicSession {
-  const topic = flashcardTopics.find((item) => item.slug === topicSlug);
+  const topic = quizTopics.find((item) => item.slug === topicSlug);
 
   if (!topic) {
     throw new Error(`Quiz topic not found: ${topicSlug}`);

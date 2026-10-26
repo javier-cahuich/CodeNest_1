@@ -2,14 +2,14 @@ import { router } from "expo-router";
 import { FlatList, Pressable, View } from "react-native";
 import { Screen } from "@/components/layout/screen";
 import { Text } from "@/components/ui/text";
-import { flashcardTopics } from "@/data/flashcard-topics";
+import { quizTopics } from "@/data/quiz-topics";
 import LucideIcon from "@/lib/icons/LucideIcon";
 
 export default function QuizTopicsScreen() {
   return (
     <Screen className="bg-background">
       <FlatList
-        data={flashcardTopics}
+        data={quizTopics}
         keyExtractor={(item) => item.slug}
         showsVerticalScrollIndicator={false}
         contentContainerClassName="gap-4 pb-8"

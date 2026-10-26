@@ -1,4 +1,4 @@
-import { Redirect, router } from "expo-router";
+import { Redirect, router, useLocalSearchParams } from "expo-router";
 import * as React from "react";
 import { View } from "react-native";
 import { Screen } from "@/components/layout/screen";
@@ -7,8 +7,16 @@ import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import LucideIcon from "@/lib/icons/LucideIcon";
 import { useAuthStore } from "@/stores/auth-store";
+import { getFlashcardTopic } from "@/data/flashcard-decks";
+import { flashcardTopicsHref, resolveFlashcardHref } from "@/lib/flashcards";
 
 export default function LoginScreen() {
+  const params = useLocalSearchParams<{ flashcardTopic?: string; reauthenticate?: string }>();
+  const flashcardTopic = getFlashcardTopic(params.flashcardTopic ?? "");
+  const isFlashcardLogin = Boolean(params.flashcardTopic);
+  const destination = isFlashcardLogin
+    ? resolveFlashcardHref(params.flashcardTopic!)
+    : "/(tabs)/profile";
   const status = useAuthStore((state) => state.status);
   const authError = useAuthStore((state) => state.authError);
   const signInWithEmail = useAuthStore((state) => state.signInWithEmail);
@@ -30,12 +38,12 @@ export default function LoginScreen() {
     setIsSubmitting(false);
 
     if (!result.error) {
-      router.replace("/(tabs)/profile");
+      router.replace(destination);
     }
-  }, [email, password, signInWithEmail]);
+  }, [email, password, signInWithEmail, destination]);
 
-  if (status === "authenticated") {
-    return <Redirect href="/(tabs)/profile" />;
+  if (status === "authenticated" && params.reauthenticate !== "1") {
+    return <Redirect href={destination} />;
   }
 
   return (
@@ -48,7 +56,11 @@ export default function LoginScreen() {
           <View className="flex-1">
             <Text className="text-h2 text-card-foreground">Iniciar sesión</Text>
             <Text className="mt-2 text-body leading-6 text-muted-foreground">
-              Accede con tu cuenta de Supabase para ver tu correo y mantener la sesión activa.
+              {isFlashcardLogin
+                ? params.reauthenticate === "1"
+                  ? "Inicia sesión nuevamente para continuar. Tus respuestas guardadas se conservan."
+                  : `Inicia sesión para practicar ${flashcardTopic?.title ?? "tus tarjetas"} y recuperar tus términos en progreso.`
+                : "Accede con tu cuenta de Supabase para ver tu correo y mantener la sesión activa."}
             </Text>
           </View>
         </View>
@@ -102,9 +114,15 @@ export default function LoginScreen() {
           variant="outline"
           className="mt-3 h-12 rounded-2xl"
           disabled={isSubmitting}
-          onPress={() => router.back()}
+          onPress={() =>
+            isFlashcardLogin
+              ? router.replace(flashcardTopicsHref(flashcardTopic?.courseId))
+              : router.back()
+          }
         >
-          <Text className="text-button text-foreground">Volver a Perfil</Text>
+          <Text className="text-button text-foreground">
+            {isFlashcardLogin ? "Volver a mazos" : "Volver a Perfil"}
+          </Text>
         </Button>
 
         <Text className="mt-4 text-body leading-6 text-muted-foreground">

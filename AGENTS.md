@@ -135,6 +135,8 @@ Current app state
 • The arreglos bidimensionales: matrices lesson includes 15 graded steps covering matrix uses, vector vs matrix comparison, visual table representation, declaration, assignment, nested traversal, complete 3x3 fill example, graded questions, recap, and feedback summary.
 • Lesson progress uses Supabase `lesson_progress` as the source of truth: completions and each lesson's best score are saved with `lesson_id = slug`, restored on app/session/Home load, and reflected locally on completed lesson cards.
 • Practice flashcards show only the prompt first; the answer and code sample are revealed in-card with "Mostrar respuesta". Completing a deck shows a summary of "Conocido" and "En progreso" counts, with restart and finish actions.
+• Flashcards require authentication and save every classification in Supabase `flashcard_progress` before advancing. React Query manages per-user/topic progress; `stores/flashcard-session-store.ts` holds only the active round. Review rounds use a fixed snapshot of pending card IDs and can repeat until none remain. Exiting preserves saved answers; reloading returns to the topic's saved progress.
+• Flashcard IDs in `data/flashcard-decks.ts` are explicit persistent identifiers: never regenerate them from positions or reuse them for different concepts. New Supabase projects need `supabase/migrations/20261023000100_flashcard_progress.sql` applied once.
 • The Practice tab opens flashcard topics directly from the "Flash drills" card.
 • The Practice tab opens quiz topics directly from the "Quick review" card.
 • The Practice tab visually follows a soft educational dashboard style with a centered blue hero and color-coded mode cards, while preserving its existing navigation behavior.

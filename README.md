@@ -20,6 +20,7 @@ This app was built with ❤️ using [Draftbit](https://draftbit.com), [Expo](ht
 - The arreglos bidimensionales: matrices lesson includes 15 graded steps covering matrix uses, vector vs matrix comparison, visual table representation, declaration, assignment, nested traversal, complete 3x3 fill example, graded questions, recap, and feedback summary.
 - Lesson progress uses Supabase `lesson_progress` as the source of truth: completions and each lesson's best score are saved with `lesson_id = slug`, restored on app/session/Home load, and reflected locally on completed lesson cards.
 - Practice flashcards show only the prompt first; the answer and code sample are revealed in-card with "Mostrar respuesta". Completing a deck shows a summary of "Conocido" and "En progreso" counts, with restart and finish actions.
+- Flashcards require sign-in and save each classification to Supabase `flashcard_progress`. Users can review only pending cards before or after a round, repeat until none remain, and recover saved answers after exiting or reloading.
 - The Practice tab opens flashcard topics directly from the "Flash drills" card.
 - The Practice tab opens quiz topics directly from the "Quick review" card.
 - Home shows points and streak at the top; the selected course is presented in an expanded card with its full title, progress, and a direct link to the course catalog.
@@ -29,6 +30,9 @@ This app was built with ❤️ using [Draftbit](https://draftbit.com), [Expo](ht
 - Feedback screens are centered and show final score, correct/incorrect answers, and a display-only EXP reward based on the score; the restart action clears the current lesson's temporary state.
 
 ## Docs
+
+- Flashcard setup and verification: [persistent review checklist](docs/flashcard-review-plan.md).
+- For a new Supabase project, apply `supabase/migrations/20261023000100_flashcard_progress.sql` once in the SQL Editor before using flashcards. It creates the progress table, timestamp trigger, and per-user RLS policies.
 
 Check out the [documentation site](https://help.draftbit.com) for in-depth info on working with Draftbit, publishing your app locally, and other helpful info.
 
